@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KARTEL CREATIVE</title>
+<title>KARTEL CREATIVE — Advertising</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
   --text-muted:#444;
   --border:#1a1a1a;
   --border-hover:#2a2a2a;
-  /* Client accent — Advertising orange */
+  /* Client accent — advertising */
   --client-accent:#FF6B35;
   --client-accent-glow:rgba(255,107,53,0.15);
   --client-accent-dim:rgba(255,107,53,0.4);
@@ -35,11 +35,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-/* === KARTEL LOGO SVG === */
+/* ═══ KARTEL LOGO SVG ═══ */
 svg{display:block}
-.hidden{display:none}
 
-/* === LOGIN GATE === */
+/* ═══ LOGIN GATE ═══ */
 #login-gate{position:fixed;inset:0;background:var(--bg);z-index:2000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .6s cubic-bezier(.4,0,.2,1)}
 #login-gate.dismissed{opacity:0;pointer-events:none}
 .login-grid{position:absolute;inset:0;overflow:hidden;opacity:.04}
@@ -47,7 +46,7 @@ svg{display:block}
 @keyframes gridMove{0%{transform:translate(0,0)}100%{transform:translate(80px,80px)}}
 .login-box{text-align:center;width:420px;padding:48px;position:relative;z-index:1}
 .login-collab{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:10px}
-.login-collab .logo-kartel svg{width:180px;height:auto}
+.login-collab .logo-kartel svg{width:140px;height:auto}
 .login-collab .logo-divider{color:var(--text-muted);font-size:1.2rem;font-weight:200}
 .login-collab .logo-client{font-size:1.4rem;font-weight:800;color:var(--client-accent);letter-spacing:2px}
 .login-sub{color:var(--text-dim);font-size:.7rem;letter-spacing:3px;margin-bottom:44px;font-weight:400;text-transform:uppercase}
@@ -59,11 +58,11 @@ svg{display:block}
 .login-box button{width:100%;padding:15px;border:1px solid var(--client-accent);border-radius:4px;background:transparent;color:var(--client-accent);font-size:.78rem;font-weight:700;letter-spacing:3px;cursor:pointer;transition:all .3s;font-family:'Outfit',sans-serif;text-transform:uppercase}
 .login-box button:hover{background:var(--client-accent);color:#000;box-shadow:0 0 30px var(--client-accent-glow)}
 
-/* === HERO BANNER === */
+/* ═══ HERO BANNER ═══ */
 .hero{padding:40px 48px 0;position:relative}
 .hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
 .hero-brands{display:flex;align-items:center;gap:20px}
-.hero-brands .kartel-mark svg{width:160px;height:auto}
+.hero-brands .kartel-mark svg{width:120px;height:auto}
 .hero-brands .brand-x{color:var(--text-muted);font-size:1rem;font-weight:200}
 .hero-brands .client-mark{font-size:1.6rem;font-weight:800;color:var(--client-accent);letter-spacing:3px}
 .hero-badge{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--client-accent);letter-spacing:1px;padding:6px 14px;border:1px solid var(--client-accent-glow);border-radius:4px;background:rgba(0,0,0,.3)}
@@ -76,11 +75,7 @@ svg{display:block}
 .hero-stat-value{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--client-accent)}
 .hero-stat-label{font-size:.65rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
 
-/* === INDUSTRY CONTEXT === */
-.hero-context{font-size:.78rem;color:var(--text-dim);max-width:680px;line-height:1.8;font-weight:300;margin-bottom:28px;padding:20px 24px;border-left:2px solid var(--client-accent-dim);background:linear-gradient(90deg,rgba(255,107,53,0.03),transparent)}
-.hero-context em{color:var(--text);font-style:normal;font-weight:500}
-
-/* === SECTION === */
+/* ═══ SECTION ═══ */
 .section{padding:32px 48px 8px;animation:fadeInUp .5s ease both;position:relative;z-index:1}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .section-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
@@ -90,7 +85,7 @@ svg{display:block}
 .section-title{font-size:.92rem;font-weight:700;color:var(--text);letter-spacing:1.5px;text-transform:uppercase}
 .section-count{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:1px}
 
-/* === VIDEO GRID === */
+/* ═══ VIDEO GRID ═══ */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;margin-bottom:12px}
 .card{position:relative;border-radius:6px;overflow:hidden;cursor:pointer;background:var(--bg-card);transition:all .35s cubic-bezier(.25,.1,.25,1);border:1px solid transparent}
 .card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 0 1px var(--border-hover);border-color:var(--border-hover)}
@@ -129,7 +124,21 @@ svg{display:block}
 .card.hover-expanded .play-btn{opacity:0 !important}
 .card.hover-expanded .card-video-overlay{opacity:1}
 
-/* === ENHANCED MODAL === */
+/* ═══ PLACEHOLDER CARD ═══ */
+.card.placeholder{cursor:default;border:1px dashed var(--border)}
+.card.placeholder:hover{transform:none;box-shadow:none;border-color:var(--client-accent-dim)}
+.card.placeholder .card-thumb{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-elevated) 100%)}
+.card.placeholder .card-thumb img{display:none}
+.card.placeholder .play-btn{display:none}
+.card.placeholder .placeholder-inner{text-align:center;padding:20px}
+.card.placeholder .placeholder-icon{font-size:1.8rem;margin-bottom:8px;opacity:.3}
+.card.placeholder .placeholder-text{font-size:.7rem;color:var(--text-muted);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.card.placeholder .placeholder-sub{font-size:.62rem;color:var(--text-muted);margin-top:4px;opacity:.6;font-weight:300}
+.card.placeholder::after{display:none}
+.card.placeholder .card-info h3{color:var(--client-accent);font-weight:700;font-size:.75rem;letter-spacing:.5px}
+.card.placeholder .card-info p{color:var(--text-muted)}
+
+/* ═══ ENHANCED MODAL ═══ */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(2,2,2,.97);z-index:1000;backdrop-filter:blur(20px)}
 .modal-overlay.active{display:flex;animation:modalIn .3s ease}
 @keyframes modalIn{from{opacity:0}to{opacity:1}}
@@ -160,7 +169,7 @@ svg{display:block}
 .modal-section-list{display:flex;flex-direction:column;gap:4px;max-height:42vh;overflow-y:auto}
 .modal-section-item{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:4px;cursor:pointer;transition:all .2s;border:1px solid transparent}
 .modal-section-item:hover{background:var(--bg-elevated);border-color:var(--border)}
-.modal-section-item.active{background:rgba(255,107,53,.04);border-color:rgba(255,107,53,.1)}
+.modal-section-item.active{background:rgba(0,140,50,.04);border-color:rgba(0,140,50,.1)}
 .msi-thumb{width:56px;height:32px;border-radius:3px;overflow:hidden;flex-shrink:0;background:var(--bg-card)}
 .msi-thumb img{width:100%;height:100%;object-fit:cover}
 .msi-name{font-size:.66rem;font-weight:500;color:var(--text);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -170,8 +179,10 @@ svg{display:block}
 @media(max-width:900px){.modal-sidebar{display:none}.modal-container{width:98vw;height:94vh}}
 @media(max-width:768px){.modal-container{border-radius:0;height:100vh;width:100vw}}
 
-/* === INTRO VIDEO SPLASH === */
+/* ═══ INTRO VIDEO SPLASH ═══ */
 #intro-splash{position:fixed;inset:0;z-index:3000;background:#000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .8s cubic-bezier(.4,0,.2,1)}
+#intro-splash.no-video{background:radial-gradient(ellipse at 30% 50%,rgba(0,140,50,.15) 0%,#000 70%)}
+#intro-splash.no-video .splash-enter{opacity:1;transform:translateX(-50%) translateY(0)}
 #intro-splash.dismissed{opacity:0;pointer-events:none}
 #intro-splash video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 #intro-splash .splash-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 40%,transparent 60%,rgba(0,0,0,.3) 100%);z-index:1}
@@ -185,15 +196,15 @@ svg{display:block}
 #intro-splash.fizzle video{filter:blur(8px) brightness(.3);transition:filter 1.2s ease}
 #intro-splash.fizzle .splash-overlay{background:rgba(0,0,0,.8);transition:background 1.2s ease}
 
-/* === FOOTER === */
+/* ═══ FOOTER ═══ */
 footer{text-align:center;padding:48px;border-top:1px solid var(--border);margin-top:40px}
 .footer-collab{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:12px;opacity:.4}
-.footer-collab svg{width:100px;height:auto}
+.footer-collab svg{width:80px;height:auto}
 .footer-collab .fc-x{color:var(--text-muted);font-size:.8rem;font-weight:200}
 .footer-collab .fc-client{font-size:.85rem;font-weight:700;color:var(--client-accent);letter-spacing:2px}
 footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transform:uppercase}
 
-/* === RESPONSIVE === */
+/* ═══ RESPONSIVE ═══ */
 @media(max-width:768px){
   .hero{padding:24px 20px 0}
   .hero-top{flex-direction:column;align-items:flex-start;gap:12px}
@@ -203,7 +214,6 @@ footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transf
   .grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
   .modal-frame-wrap,.modal-top{width:95vw}
   .login-collab{flex-direction:column;gap:10px}
-  .hero-context{padding:16px 18px;font-size:.74rem}
 }
 @media(max-width:480px){
   .grid{grid-template-columns:1fr 1fr;gap:10px}
@@ -215,19 +225,21 @@ footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transf
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="kartel-logo" viewBox="0 0 800 120">
-    <path d="M10,10 L10,110 L40,110 L40,70 L50,60 L90,110 L130,110 L75,45 L125,10 L88,10 L40,55 L40,10 Z" fill="none" stroke="#008C32" stroke-width="5" stroke-linejoin="miter"/>
-    <path d="M140,110 L185,10 L215,10 L260,110 L230,110 L220,85 L180,85 L170,110 Z M190,62 L210,62 L200,30 Z" fill="none" stroke="#008C32" stroke-width="5" stroke-linejoin="miter"/>
-    <path d="M280,10 L280,110 L310,110 L310,72 L340,72 L365,110 L400,110 L370,68 C385,62 395,48 395,40 C395,22 380,10 358,10 Z M310,35 L352,35 C363,35 368,40 368,48 C368,56 363,62 352,62 L310,62 Z" fill="none" stroke="#008C32" stroke-width="5" stroke-linejoin="miter"/>
-    <path d="M410,10 L510,10 L510,35 L475,35 L475,110 L445,110 L445,35 L410,35 Z" fill="none" stroke="#008C32" stroke-width="5" stroke-linejoin="miter"/>
-    <path d="M530,10 L640,10 L640,35 L560,35 L560,48 L630,48 L630,72 L560,72 L560,85 L640,85 L640,110 L530,110 Z" fill="none" stroke="#008C32" stroke-width="5" stroke-linejoin="miter"/>
-    <path d="M660,10 L660,110 L780,110 L780,85 L690,85 L690,10 Z" fill="none" stroke="#008C32" stroke-width="5" stroke-linejoin="miter"/>
+    <path d="M10,10 L10,110 L40,110 L40,70 L50,60 L90,110 L130,110 L75,45 L125,10 L88,10 L40,55 L40,10 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M140,110 L185,10 L215,10 L260,110 L230,110 L220,85 L180,85 L170,110 Z M190,62 L210,62 L200,30 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M280,10 L280,110 L310,110 L310,72 L340,72 L365,110 L400,110 L370,68 C385,62 395,48 395,40 C395,22 380,10 358,10 Z M310,35 L352,35 C363,35 368,40 368,48 C368,56 363,62 352,62 L310,62 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M410,10 L510,10 L510,35 L475,35 L475,110 L445,110 L445,35 L410,35 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M530,10 L640,10 L640,35 L560,35 L560,48 L630,48 L630,72 L560,72 L560,85 L640,85 L640,110 L530,110 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M660,10 L660,110 L780,110 L780,85 L690,85 L690,10 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
   </symbol>
 </svg>
 
-<!-- === INTRO VIDEO SPLASH === -->
+<!-- ═══ INTRO VIDEO SPLASH ═══ -->
 <div id="intro-splash">
   <video id="splashVideo" autoplay muted loop playsinline preload="auto">
     <source src="../kartel-intro.mp4" type="video/mp4">
+    <source src="../Kartel TITLE pitch.mp4" type="video/mp4">
+    <source src="../Kartel TITLE pitch.mov" type="video/mp4">
   </video>
   <div class="splash-overlay"></div>
   <div class="splash-enter" id="splashEnter">
@@ -267,7 +279,6 @@ footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transf
     <div class="hero-glow"></div>
     <div class="hero-title" id="heroTitle"></div>
     <div class="hero-desc" id="heroDesc"></div>
-    <div class="hero-context" id="heroContext"></div>
     <div class="hero-stats" id="heroStats"></div>
   </div>
   <div id="content"></div>
@@ -296,10 +307,10 @@ footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transf
     <div class="modal-sidebar">
       <div class="modal-sb-section">
         <div class="modal-sb-title">Video Details</div>
-        <div class="modal-detail-row"><span class="modal-detail-label">Category</span><span class="modal-detail-value" id="mdCat">&mdash;</span></div>
-        <div class="modal-detail-row"><span class="modal-detail-label">Resolution</span><span class="modal-detail-value" id="mdRes">&mdash;</span></div>
-        <div class="modal-detail-row"><span class="modal-detail-label">Aspect Ratio</span><span class="modal-detail-value" id="mdAspect">&mdash;</span></div>
-        <div class="modal-detail-row"><span class="modal-detail-label">Format</span><span class="modal-detail-value" id="mdFormat">&mdash;</span></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Category</span><span class="modal-detail-value" id="mdCat">—</span></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Resolution</span><span class="modal-detail-value" id="mdRes">—</span></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Aspect Ratio</span><span class="modal-detail-value" id="mdAspect">—</span></div>
+        <div class="modal-detail-row"><span class="modal-detail-label">Format</span><span class="modal-detail-value" id="mdFormat">—</span></div>
       </div>
       <div class="modal-sb-section">
         <div class="modal-sb-title" id="mdSectionTitle">In This Section</div>
@@ -319,166 +330,193 @@ footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transf
 </footer>
 
 <script>
-// ===================================================
-// ADVERTISING & CREATIVE SERVICES — PRIVATE COLLECTION
-// ===================================================
-
-// Company personalization from URL
+// Industry collection — uses same JS as kartel-view.html
 const params = new URLSearchParams(window.location.search);
 const companyName = params.get('company') || 'Your Agency';
-const password = 'AD-Kartel2026';
 
-// Collection data
-const sections = [
-  {
-    name: "Campaign Production at Scale",
-    barColor: "client",
-    videos: [
-      {name:"LIDL Spot 16x9",id:"1iDeGzhof4UkD8hbBpArS93gNkEEqurXY",cat:"CPG Commercial"},
-      {name:"LIDL Weekly Deals (4x5)",id:"1r67IMWvV8nxzrL-yhYYnlY5pu-Xcr2pL",cat:"CPG Commercial"},
-      {name:"LIDL Spot 9x16",id:"1mC2qjoRkX3NMYfo0nHarFe1eBJGqfIMO",cat:"CPG Commercial"},
-      {name:"LIDL Spot 4x5",id:"1mgxP15oBBXiYheq265xBhhU4mKfDNLNe",cat:"CPG Commercial"},
-      {name:"Everyday Dose",id:"1ra66S_KzowwPiC9iWF2WFXOfx6B9hWvW",cat:"DTC Commercial"},
-      {name:"Newell Bubba (H264)",id:"1OM-EYPi7KP_7TrWfByaXKfO8XTzIt3jH",cat:"Brand Commercial"}
-    ]
-  },
-  {
-    name: "Brand Films & Product Creative",
-    barColor: "client",
-    videos: [
-      {name:"Froya Hero Video",id:"1w3Z3aGz8Ae3LwdW4ik_PplxuD3uX3dkA",cat:"Brand Film"},
-      {name:"Froya V2 w/ VO",id:"1WuEsMUM3jfeZuobcI8_4MSlT8iHsjXuL",cat:"Brand Film"},
-      {name:"Thesis Clarity 1x1 V2",id:"1Fp5DmNUJBC3eMhgPfPkAKReduwZ6NVOi",cat:"Product Ad"},
-      {name:"Thesis Clarity 9x16",id:"14rpOCo-zIynGFP7_kYXo-cZEr0Y86sy6",cat:"Product Ad"},
-      {name:"Sephora Spec Ad",id:"12sdmCk_-mUk4yBKqiMxDNUCnCevrSLHb",cat:"Beauty/Fashion"},
-      {name:"Osea Horizontal V1",id:"1Eh9jMiHDmI4k9nCbHy2m-LPC7BiRRS_E",cat:"Product Demo"}
-    ]
-  },
-  {
-    name: "Kartel Capabilities",
-    barColor: "green",
-    videos: [
-      {name:"Kartel Demo",id:"1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5",cat:"Capabilities Reel"},
-      {name:"New Reel Master",id:"1aTMvhs35gd6B_0fLM6M3xbV_EtdAczAQ",cat:"Reel"},
-      {name:"Kartel Scaling Creative Cut",id:"1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p",cat:"Capabilities"},
-      {name:"CIP Client Review Workflow",id:"13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8",cat:"Workflow Demo"},
-      {name:"Kartel CBS News Clip",id:"18gVdXetyWeWPLpk4j5XdMUzW7-zETAbA",cat:"Press"}
-    ]
+const col = {
+  client: companyName,
+  accent: '#FF6B35',
+  accentGlow: 'rgba(255,107,53,0.15)',
+  accentDim: 'rgba(255,107,53,0.4)',
+  password: 'AD-Kartel2026',
+  badge: 'PRIVATE COLLECTION',
+  title: 'Creative Infrastructure for <span>{company}</span>'.replace('{company}', companyName),
+  desc: "A curated selection of Kartel’s creative production work — campaigns, multi-format delivery, and brand-consistent assets built at the speed and scale agencies need.",
+  sowDeliverables: null,
+  sections: [
+  {name:"Campaign Production at Scale",barColor:"client",videos:[
+    {name:"LIDL Spot 16x9",id:"1iDeGzhof4UkD8hbBpArS93gNkEEqurXY",cat:"CPG Commercial"},
+    {name:"LIDL Weekly Deals (4x5)",id:"1r67IMWvV8nxzrL-yhYYnlY5pu-Xcr2pL",cat:"CPG Commercial"},
+    {name:"LIDL Spot 9x16",id:"1mC2qjoRkX3NMYfo0nHarFe1eBJGqfIMO",cat:"CPG Commercial"},
+    {name:"LIDL Spot 4x5",id:"1mgxP15oBBXiYheq265xBhhU4mKfDNLNe",cat:"CPG Commercial"},
+    {name:"Everyday Dose",id:"1ra66S_KzowwPiC9iWF2WFXOfx6B9hWvW",cat:"DTC Commercial"},
+    {name:"Newell Bubba (H264)",id:"1OM-EYPi7KP_7TrWfByaXKfO8XTzIt3jH",cat:"Brand Commercial"}
+  ]},
+  {name:"Brand Films & Product Creative",barColor:"client",videos:[
+    {name:"Froya Hero Video",id:"1w3Z3aGz8Ae3LwdW4ik_PplxuD3uX3dkA",cat:"Brand Film"},
+    {name:"Froya V2 w/ VO",id:"1WuEsMUM3jfeZuobcI8_4MSlT8iHsjXuL",cat:"Brand Film"},
+    {name:"Thesis Clarity 1x1 V2",id:"1Fp5DmNUJBC3eMhgPfPkAKReduwZ6NVOi",cat:"Product Ad"},
+    {name:"Thesis Clarity 9x16",id:"14rpOCo-zIynGFP7_kYXo-cZEr0Y86sy6",cat:"Product Ad"},
+    {name:"Sephora Spec Ad",id:"12sdmCk_-mUk4yBKqiMxDNUCnCevrSLHb",cat:"Beauty/Fashion"},
+    {name:"Osea Horizontal V1",id:"1Eh9jMiHDmI4k9nCbHy2m-LPC7BiRRS_E",cat:"Product Demo"}
+  ]},
+  {name:"Kartel Capabilities",barColor:"green",videos:[
+    {name:"Kartel Demo",id:"1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5",cat:"Capabilities Reel"},
+    {name:"New Reel Master",id:"1aTMvhs35gd6B_0fLM6M3xbV_EtdAczAQ",cat:"Reel"},
+    {name:"Kartel Scaling Creative Cut",id:"1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p",cat:"Capabilities"},
+    {name:"CIP Client Review Workflow",id:"13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8",cat:"Workflow Demo"},
+    {name:"Kartel CBS News Clip",id:"18gVdXetyWeWPLpk4j5XdMUzW7-zETAbA",cat:"Press"}
+  ]}
+]
+};
+
+  // ═══ APPLY ACCENT COLORS ═══
+  const root = document.documentElement;
+  root.style.setProperty('--client-accent', col.accent);
+  root.style.setProperty('--client-accent-glow', col.accentGlow);
+  root.style.setProperty('--client-accent-dim', col.accentDim);
+
+  // ═══ INTRO VIDEO SPLASH ═══
+  const splash = document.getElementById('intro-splash');
+  const splashVideo = document.getElementById('splashVideo');
+  const splashEnter = document.getElementById('splashEnter');
+  document.getElementById('splashClient').textContent = col.client + ' \u00D7 Kartel';
+  let splashDismissed = false;
+
+  const playPromise = splashVideo.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      splashVideo.muted = true;
+      splashVideo.play().catch(() => dismissSplash());
+    });
   }
-];
 
-// Auto-calculate stats
-const totalVideos = sections.reduce((sum, s) => sum + s.videos.length, 0);
-const totalSections = sections.length;
-
-// === INTRO VIDEO SPLASH ===
-const splash = document.getElementById('intro-splash');
-const splashVideo = document.getElementById('splashVideo');
-const splashEnter = document.getElementById('splashEnter');
-document.getElementById('splashClient').textContent = companyName + ' \u00D7 Kartel';
-let splashDismissed = false;
-
-const playPromise = splashVideo.play();
-if (playPromise !== undefined) {
-  playPromise.catch(() => {
-    splashVideo.muted = true;
-    splashVideo.play().catch(() => dismissSplash());
+  splashVideo.addEventListener('playing', () => {
+    setTimeout(() => splashEnter.classList.add('visible'), 2000);
   });
-}
+  splashVideo.addEventListener('error', () => dismissSplash());
+  const sources = splashVideo.querySelectorAll('source');
+  sources[sources.length - 1].addEventListener('error', () => dismissSplash());
 
-splashVideo.addEventListener('playing', () => {
-  setTimeout(() => splashEnter.classList.add('visible'), 2000);
-});
-splashVideo.addEventListener('error', () => dismissSplash());
-const sources = splashVideo.querySelectorAll('source');
-sources[sources.length - 1].addEventListener('error', () => dismissSplash());
+  let splashTimeout = setTimeout(() => {
+    if (splashVideo.readyState < 2) dismissSplash();
+  }, 4000);
 
-let splashTimeout = setTimeout(() => {
-  if (splashVideo.readyState < 2) dismissSplash();
-}, 4000);
+  splashVideo.addEventListener('canplay', () => {
+    setTimeout(() => splashEnter.classList.add('visible'), 2000);
+  });
 
-splashVideo.addEventListener('canplay', () => {
-  setTimeout(() => splashEnter.classList.add('visible'), 2000);
-});
+  document.getElementById('splashBtn').onclick = dismissSplash;
+  splash.addEventListener('touchend', e => { if (splashEnter.classList.contains('visible')) dismissSplash(); });
 
-document.getElementById('splashBtn').onclick = dismissSplash;
-splash.addEventListener('touchend', e => { if (splashEnter.classList.contains('visible')) dismissSplash(); });
+  function dismissSplash() {
+    if (splashDismissed) return;
+    splashDismissed = true;
+    clearTimeout(splashTimeout);
+    splash.classList.add('fizzle');
+    splashVideo.pause();
+    setTimeout(() => {
+      splash.classList.add('dismissed');
+      document.getElementById('login-gate').classList.remove('hidden');
+    }, 1200);
+  }
 
-function dismissSplash() {
-  if (splashDismissed) return;
-  splashDismissed = true;
-  clearTimeout(splashTimeout);
-  splash.classList.add('fizzle');
-  splashVideo.pause();
-  setTimeout(() => {
+  // ═══ LOGIN GATE ═══
+  document.getElementById('loginClient').textContent = col.client;
+  document.getElementById('loginSub').textContent = 'Private Collection';
+
+  const authKey = 'kartel_view_' + companyName.replace(/\s+/g, '_').toLowerCase();
+  const gate = document.getElementById('login-gate');
+  if (sessionStorage.getItem(authKey) === '1') {
     splash.classList.add('dismissed');
-    document.getElementById('login-gate').classList.remove('hidden');
-  }, 1200);
-}
-
-// === LOGIN GATE ===
-document.getElementById('loginClient').textContent = companyName;
-document.getElementById('loginSub').textContent = 'Private Collection';
-
-const authKey = 'kartel_view_advertising_' + companyName.replace(/\s+/g, '_').toLowerCase();
-const gate = document.getElementById('login-gate');
-if (sessionStorage.getItem(authKey) === '1') {
-  splash.classList.add('dismissed');
-  gate.classList.add('dismissed');
-  gate.classList.remove('hidden');
-  document.getElementById('app').classList.remove('hidden');
-  document.getElementById('footer').classList.remove('hidden');
-}
-const check = () => {
-  if (document.getElementById('loginPass').value === password) {
-    sessionStorage.setItem(authKey, '1');
     gate.classList.add('dismissed');
+    gate.classList.remove('hidden');
     document.getElementById('app').classList.remove('hidden');
     document.getElementById('footer').classList.remove('hidden');
-  } else {
-    document.getElementById('loginError').textContent = 'Incorrect access code';
-    document.getElementById('loginPass').value = '';
-    document.getElementById('loginPass').focus();
   }
-};
-document.getElementById('loginBtn').onclick = check;
-document.getElementById('loginPass').onkeydown = e => { if (e.key === 'Enter') check(); };
+  const check = () => {
+    if (document.getElementById('loginPass').value === col.password) {
+      sessionStorage.setItem(authKey, '1');
+      gate.classList.add('dismissed');
+      document.getElementById('app').classList.remove('hidden');
+      document.getElementById('footer').classList.remove('hidden');
+    } else {
+      document.getElementById('loginError').textContent = 'Incorrect access code';
+      document.getElementById('loginPass').value = '';
+      document.getElementById('loginPass').focus();
+    }
+  };
+  document.getElementById('loginBtn').onclick = check;
+  document.getElementById('loginPass').onkeydown = e => { if (e.key === 'Enter') check(); };
 
-// === HERO ===
-document.getElementById('clientMark').textContent = companyName;
-document.getElementById('heroBadge').textContent = 'PRIVATE COLLECTION';
-document.getElementById('heroTitle').innerHTML = 'Creative Infrastructure for <span>' + companyName + '</span>';
-document.getElementById('heroDesc').textContent = 'A curated selection of Kartel\u2019s creative production work \u2014 campaigns, multi-format delivery, and brand-consistent assets built at the speed and scale agencies need.';
-document.getElementById('heroContext').innerHTML = 'The agencies we work with were hitting the same wall: <em>client expectations for volume keep climbing</em>, but headcount and margins don\u2019t move in the same direction. We build custom systems on each client\u2019s brand data so outputs are <em>production-ready from the first pass</em>.';
-document.getElementById('footerClient').textContent = companyName;
+  // ═══ HERO ═══
+  document.getElementById('clientMark').textContent = col.client;
+  document.getElementById('heroBadge').textContent = col.badge || 'PRIVATE COLLECTION';
+  document.getElementById('heroTitle').innerHTML = col.title;
+  document.getElementById('heroDesc').textContent = col.desc;
+  document.getElementById('footerClient').textContent = col.client;
 
-// === STATS ===
-document.getElementById('heroStats').innerHTML = `
-  <div class="hero-stat"><div class="hero-stat-value">${totalVideos}</div><div class="hero-stat-label">Videos</div></div>
-  <div class="hero-stat"><div class="hero-stat-value">${totalSections}</div><div class="hero-stat-label">Sections</div></div>
-`;
+  // ═══ STATS ═══
+  let totalVideos = 0, totalDeliverables = 0;
+  col.sections.forEach(s => {
+    if (s.videos) totalVideos += s.videos.length;
+    if (s.placeholders) totalDeliverables += s.placeholders.length;
+  });
+  if (col.sowDeliverables && col.sowDeliverables.length) totalDeliverables += col.sowDeliverables.length;
 
-// === SECTIONS ===
-const content = document.getElementById('content');
-sections.forEach((sec, idx) => {
-  const div = document.createElement('div');
-  div.className = 'section';
-  div.style.animationDelay = `${idx * 0.08}s`;
-  const itemCount = sec.videos.length;
-  let gridHTML = sec.videos.map(v => `
-    <div class="card" data-id="${v.id}" data-name="${v.name}" data-cat="${v.cat}">
-      <div class="card-thumb">
-        <img class="loading" src="https://lh3.googleusercontent.com/d/${v.id}=w640-h360-p-k-nu-iv1" alt="${v.name}" loading="lazy" onload="this.classList.remove('loading')" onerror="tryFallback(this,'${v.id}')">
-        <div class="play-btn"></div>
-      </div>
-      <div class="card-info"><h3>${v.name}</h3><p>${v.cat}</p></div>
-    </div>`).join('');
+  document.getElementById('heroStats').innerHTML = `
+    <div class="hero-stat"><div class="hero-stat-value">${totalVideos}</div><div class="hero-stat-label">Videos</div></div>
+    ${totalDeliverables ? `<div class="hero-stat"><div class="hero-stat-value">${totalDeliverables}</div><div class="hero-stat-label">Deliverables</div></div>` : ''}
+    <div class="hero-stat"><div class="hero-stat-value">${col.sections.length + (col.sowDeliverables?.length ? 1 : 0)}</div><div class="hero-stat-label">Sections</div></div>
+  `;
 
-  div.innerHTML = `<div class="section-header"><div class="section-bar ${sec.barColor}"></div><span class="section-title">${sec.name}</span><span class="section-count">${itemCount}</span></div><div class="grid">${gridHTML}</div>`;
-  content.appendChild(div);
-});
+  // ═══ SECTIONS ═══
+  const content = document.getElementById('content');
+  col.sections.forEach((sec, idx) => {
+    const div = document.createElement('div');
+    div.className = 'section';
+    div.style.animationDelay = `${idx * 0.08}s`;
+    const itemCount = (sec.videos ? sec.videos.length : 0) + (sec.placeholders ? sec.placeholders.length : 0);
+    let gridHTML = '';
 
-// === Enhanced Modal ===
+    if (sec.videos) {
+      gridHTML += sec.videos.map(v => `
+        <div class="card" data-id="${v.id}" data-name="${v.name}" data-cat="${v.cat}">
+          <div class="card-thumb">
+            <img class="loading" src="https://lh3.googleusercontent.com/d/${v.id}=w640-h360-p-k-nu-iv1" alt="${v.name}" loading="lazy" onload="this.classList.remove('loading')" onerror="tryFallback(this,'${v.id}')">
+            <div class="play-btn"></div>
+          </div>
+          <div class="card-info"><h3>${v.name}</h3><p>${v.cat}</p></div>
+        </div>`).join('');
+    }
+    if (sec.placeholders) {
+      gridHTML += sec.placeholders.map(p => `
+        <div class="card placeholder">
+          <div class="card-thumb"><div class="placeholder-inner"><div class="placeholder-icon">\u25B6</div><div class="placeholder-text">Coming Soon</div><div class="placeholder-sub">${p.sub}</div></div></div>
+          <div class="card-info"><h3>${p.name}</h3><p>${p.sub}</p></div>
+        </div>`).join('');
+    }
+
+    div.innerHTML = `<div class="section-header"><div class="section-bar ${sec.barColor}"></div><span class="section-title">${sec.name}</span><span class="section-count">${itemCount}</span></div><div class="grid">${gridHTML}</div>`;
+    content.appendChild(div);
+  });
+
+  // ═══ SOW DELIVERABLES ═══
+  if (col.sowDeliverables && col.sowDeliverables.length) {
+    const sowDiv = document.createElement('div');
+    sowDiv.className = 'section';
+    sowDiv.style.animationDelay = `${col.sections.length * 0.08}s`;
+    const sowGrid = col.sowDeliverables.map(d => `
+      <div class="card placeholder">
+        <div class="card-thumb"><div class="placeholder-inner"><div class="placeholder-icon">\u{1F4C4}</div><div class="placeholder-text">${d.status || 'Pending'}</div><div class="placeholder-sub">Per SOW</div></div></div>
+        <div class="card-info"><h3>${d.name}</h3><p>${d.status || 'Pending'}</p></div>
+      </div>`).join('');
+    sowDiv.innerHTML = `<div class="section-header"><div class="section-bar client"></div><span class="section-title">Your Deliverables</span><span class="section-count">${col.sowDeliverables.length}</span></div><div class="grid">${sowGrid}</div>`;
+    content.appendChild(sowDiv);
+  }
+
+// Enhanced Modal
 const modal = document.getElementById('modal');
 const modalFrame = document.getElementById('modalFrame');
 const modalContainer = document.getElementById('modalContainer');
@@ -553,7 +591,7 @@ document.onkeydown = e => {
   if (e.key === 'ArrowRight' && currentVideoIdx < currentSectionVideos.length - 1) loadModalVideo(currentVideoIdx + 1);
 };
 
-// === Thumbnail fallback chain ===
+// Thumbnail fallback
 function tryFallback(img, id) {
   const src = img.src;
   if (src.includes('lh3.googleusercontent')) img.src = `https://drive.google.com/thumbnail?id=${id}&sz=w640`;
@@ -580,7 +618,7 @@ setTimeout(() => {
   });
 }, 8000);
 
-// === AUTOPLAY ON SCROLL ===
+// ─── AUTOPLAY ON SCROLL ───
 let activeAutoplaySection = null;
 function activateAutoplay(section) {
   if (activeAutoplaySection === section) return;
@@ -619,7 +657,7 @@ const sectionObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 document.querySelectorAll('.section').forEach(s => sectionObserver.observe(s));
 
-// === HOVER EXPAND PREVIEW (0.5s delay) ===
+// ─── HOVER EXPAND PREVIEW (0.5s delay) ───
 let hoverTimer = null;
 let hoveredCard = null;
 document.addEventListener('mouseover', e => {
