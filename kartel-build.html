@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KARTEL — New Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --k-green:#008C32;--k-green-bright:#00A63E;--k-green-dim:#006B26;
+  --k-green-glow:rgba(0,140,50,0.2);--k-green-10:rgba(0,140,50,0.08);--k-green-05:rgba(0,140,50,0.04);
+  --bg:#050505;--bg-card:#0e0e0e;--bg-elevated:#161616;--bg-input:#0c0c0c;
+  --text:#ececec;--text-dim:#888;--text-muted:#444;--border:#1a1a1a;--border-hover:#2a2a2a;
+  --danger:#cc3333;--client-accent:#008C32;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+a{color:inherit;text-decoration:none}
+
+/* ═══ HEADER ═══ */
+.header{padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.header svg{width:90px;height:auto}
+.header-mid{display:flex;align-items:center;gap:12px}
+.header-mid .divider{width:1px;height:16px;background:var(--border)}
+.header-title{font-size:.68rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;font-weight:500}
+.header-right a{font-size:.65rem;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--border);border-radius:4px;transition:all .2s}
+.header-right a:hover{border-color:var(--text-dim);color:var(--text)}
+
+/* ═══ PROGRESS ═══ */
+.progress-bar{display:flex;align-items:center;gap:0;padding:0 48px;margin:24px auto;max-width:800px}
+.prog-step{flex:1;display:flex;align-items:center;gap:8px;position:relative}
+.prog-step:not(:last-child)::after{content:'';flex:1;height:1px;background:var(--border);margin:0 8px}
+.prog-step.done:not(:last-child)::after{background:var(--k-green)}
+.prog-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--text-muted);font-weight:600;transition:all .3s;flex-shrink:0}
+.prog-step.active .prog-dot{border-color:var(--k-green);color:var(--k-green);background:var(--k-green-05);box-shadow:0 0 12px var(--k-green-glow)}
+.prog-step.done .prog-dot{border-color:var(--k-green);background:var(--k-green);color:#000}
+.prog-label{font-size:.58rem;color:var(--text-muted);letter-spacing:.5px;font-weight:500;white-space:nowrap}
+.prog-step.active .prog-label{color:var(--text)}
+.prog-step.done .prog-label{color:var(--k-green)}
+
+/* ═══ WIZARD ═══ */
+.wizard{max-width:700px;margin:0 auto;padding:20px 48px 60px}
+.step{display:none;animation:stepIn .4s ease}
+.step.active{display:block}
+@keyframes stepIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.step-title{font-size:1.6rem;font-weight:800;letter-spacing:1px;margin-bottom:6px}
+.step-title span{color:var(--k-green)}
+.step-sub{font-size:.82rem;color:var(--text-dim);line-height:1.6;margin-bottom:32px;max-width:520px;font-weight:300}
+.field{margin-bottom:20px}
+.field-label{display:block;font-size:.62rem;color:var(--text-dim);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;font-weight:600}
+.field-input{width:100%;padding:14px 18px;border-radius:6px;border:1px solid var(--border);background:var(--bg-input);color:var(--text);font-size:.88rem;font-family:'Outfit',sans-serif;outline:none;transition:all .25s;letter-spacing:.3px}
+.field-input:focus{border-color:var(--k-green);box-shadow:0 0 0 3px var(--k-green-glow)}
+.field-input::placeholder{color:var(--text-muted);font-size:.8rem}
+textarea.field-input{resize:vertical;min-height:80px;line-height:1.6}
+.field-row{display:flex;gap:12px}
+.field-row .field{flex:1}
+.field-hint{font-size:.55rem;color:var(--text-muted);margin-top:5px;letter-spacing:.3px}
+
+/* Connectors */
+.connectors{display:flex;gap:10px;margin-bottom:28px}
+.connector{flex:1;padding:14px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);text-align:center;cursor:pointer;transition:all .3s}
+.connector:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+.connector.connected{border-color:var(--k-green);background:var(--k-green-05)}
+.connector-icon{font-size:1.4rem;margin-bottom:6px;opacity:.5}
+.connector.connected .connector-icon{opacity:1}
+.connector-name{font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim)}
+.connector.connected .connector-name{color:var(--k-green)}
+.connector-status{font-size:.5rem;color:var(--text-muted);margin-top:4px;letter-spacing:.5px}
+.connector.connected .connector-status{color:var(--k-green)}
+
+/* Color picker */
+.color-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.color-swatch{width:36px;height:36px;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.color-swatch:hover{transform:scale(1.1)}
+.color-swatch.active{border-color:#fff;box-shadow:0 0 16px var(--k-green-glow)}
+.color-custom{width:36px;height:36px;border-radius:6px;border:2px dashed var(--border);cursor:pointer;overflow:hidden;position:relative}
+.color-custom input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.extracted-colors{display:flex;gap:8px;align-items:center;margin-top:12px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px}
+.extracted-colors .ec-label{font-size:.55rem;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-right:8px;white-space:nowrap;font-weight:600}
+.extracted-dot{width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.extracted-dot:hover{transform:scale(1.15)}
+.extracted-dot.active{border-color:#fff}
+
+/* Industry pills */
+.industry-pills{display:flex;flex-wrap:wrap;gap:8px}
+.ind-pill{padding:10px 18px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-dim);font-size:.72rem;font-weight:500;cursor:pointer;transition:all .25s;font-family:'Outfit',sans-serif}
+.ind-pill:hover{border-color:var(--k-green-dim);color:var(--text)}
+.ind-pill.active{background:var(--k-green);border-color:var(--k-green);color:#000;font-weight:700}
+
+/* Deliverable checkboxes */
+.del-checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.del-check{padding:12px 16px;border-radius:6px;border:1px solid var(--border);background:var(--bg-card);cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:10px}
+.del-check:hover{border-color:var(--border-hover)}
+.del-check.active{border-color:var(--k-green);background:var(--k-green-05)}
+.del-check-box{width:18px;height:18px;border-radius:4px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:.6rem;color:transparent}
+.del-check.active .del-check-box{border-color:var(--k-green);background:var(--k-green);color:#000}
+.del-check-label{font-size:.75rem;font-weight:500;color:var(--text-dim)}
+.del-check.active .del-check-label{color:var(--text)}
+
+/* Upload zone */
+.upload-zone{border:2px dashed var(--border);border-radius:8px;padding:32px;text-align:center;cursor:pointer;transition:all .3s;margin-bottom:16px}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--k-green);background:var(--k-green-05)}
+.upload-zone .uz-icon{font-size:2rem;margin-bottom:8px;opacity:.3}
+.upload-zone .uz-text{font-size:.75rem;color:var(--text-dim);line-height:1.5}
+.upload-zone .uz-hint{font-size:.55rem;color:var(--text-muted);margin-top:6px}
+.uploaded-previews{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.uploaded-preview{width:64px;height:64px;border-radius:6px;overflow:hidden;position:relative;border:1px solid var(--border)}
+.uploaded-preview img{width:100%;height:100%;object-fit:cover}
+.uploaded-preview .up-remove{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.7);border:none;color:#fff;font-size:.55rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* Video selection grid */
+.video-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;max-height:50vh;overflow-y:auto;padding:4px}
+.vs-card{border-radius:6px;overflow:hidden;cursor:pointer;background:var(--bg-card);border:2px solid transparent;transition:all .25s}
+.vs-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+.vs-card.selected{border-color:var(--k-green);box-shadow:0 0 12px var(--k-green-glow)}
+.vs-card.selected::after{content:'\2713';position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:50%;background:var(--k-green);color:#000;font-size:.55rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+.vs-card{position:relative}
+.vs-thumb{aspect-ratio:16/9;overflow:hidden;background:var(--bg-elevated)}
+.vs-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.vs-card:hover .vs-thumb img{transform:scale(1.05)}
+.vs-name{padding:6px 8px;font-size:.58rem;font-weight:500;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vs-card.selected .vs-name{color:var(--k-green)}
+.vs-cat-filter{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.vs-cat-btn{padding:4px 10px;border-radius:3px;border:1px solid var(--border);background:none;color:var(--text-muted);font-size:.58rem;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s}
+.vs-cat-btn:hover{border-color:var(--text-dim);color:var(--text)}
+.vs-cat-btn.active{background:var(--k-green);border-color:var(--k-green);color:#000;font-weight:600}
+.rec-label{font-size:.55rem;color:var(--k-green);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;font-weight:600}
+.rec-divider{height:1px;background:var(--border);margin:16px 0}
+.rec-label-dim{font-size:.55rem;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;font-weight:600}
+
+/* Nav buttons */
+.step-nav{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:24px;border-top:1px solid var(--border)}
+.nav-back{padding:10px 24px;border-radius:6px;font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;background:transparent;border:1px solid var(--border);color:var(--text-dim);font-family:'Outfit',sans-serif;transition:all .25s}
+.nav-back:hover{border-color:var(--text-dim);color:var(--text)}
+.nav-next{padding:10px 32px;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;background:var(--k-green);color:#000;border:none;font-family:'Outfit',sans-serif;transition:all .25s}
+.nav-next:hover{background:var(--k-green-bright);box-shadow:0 0 24px var(--k-green-glow)}
+.nav-skip{font-size:.62rem;color:var(--text-muted);cursor:pointer;letter-spacing:1px;text-transform:uppercase;border:none;background:none;font-family:'Outfit',sans-serif;transition:color .2s}
+.nav-skip:hover{color:var(--text)}
+
+/* Preview section */
+.preview-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:20px}
+.preview-hero{padding:24px;border-bottom:1px solid var(--border)}
+.preview-hero .ph-brands{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.preview-hero .ph-kartel{font-size:.7rem;color:var(--k-green);font-weight:700;letter-spacing:2px}
+.preview-hero .ph-x{color:var(--text-muted);font-size:.7rem}
+.preview-hero .ph-client{font-size:.7rem;font-weight:800;letter-spacing:2px}
+.preview-hero .ph-title{font-size:1.1rem;font-weight:800;margin:8px 0 6px}
+.preview-hero .ph-desc{font-size:.72rem;color:var(--text-dim);line-height:1.5;font-weight:300}
+.preview-videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:16px}
+.pv-card{border-radius:4px;overflow:hidden;background:var(--bg-elevated)}
+.pv-card .pv-thumb{aspect-ratio:16/9;overflow:hidden}
+.pv-card .pv-thumb img{width:100%;height:100%;object-fit:cover}
+.pv-card .pv-name{padding:6px 8px;font-size:.55rem;font-weight:500;color:var(--text-dim)}
+
+@media(max-width:768px){
+  .wizard{padding:16px 20px 40px}
+  .progress-bar{padding:0 20px}
+  .field-row{flex-direction:column}
+  .del-checks{grid-template-columns:1fr}
+  .connectors{flex-direction:column}
+  .video-select-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="kartel-logo" viewBox="0 0 800 120">
+    <path d="M10,10 L10,110 L40,110 L40,70 L50,60 L90,110 L130,110 L75,45 L125,10 L88,10 L40,55 L40,10 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M140,110 L185,10 L215,10 L260,110 L230,110 L220,85 L180,85 L170,110 Z M190,62 L210,62 L200,30 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M280,10 L280,110 L310,110 L310,72 L340,72 L365,110 L400,110 L370,68 C385,62 395,48 395,40 C395,22 380,10 358,10 Z M310,35 L352,35 C363,35 368,40 368,48 C368,56 363,62 352,62 L310,62 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M410,10 L510,10 L510,35 L475,35 L475,110 L445,110 L445,35 L410,35 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M530,10 L640,10 L640,35 L560,35 L560,48 L630,48 L630,72 L560,72 L560,85 L640,85 L640,110 L530,110 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M660,10 L660,110 L780,110 L780,85 L690,85 L690,10 Z" fill="none" stroke="#008C32" stroke-width="3" stroke-linejoin="miter"/>
+  </symbol>
+</svg>
+
+<div class="header">
+  <div class="header-mid">
+    <svg viewBox="0 0 800 120" aria-label="Kartel"><use href="#kartel-logo"/></svg>
+    <div class="divider"></div>
+    <span class="header-title">New Collection</span>
+  </div>
+  <div class="header-right"><a href="kartel-creative-v2.html">&larr; Back to Portfolio</a></div>
+</div>
+
+<div class="progress-bar" id="progressBar">
+  <div class="prog-step active" data-step="1"><div class="prog-dot">1</div><span class="prog-label">Client</span></div>
+  <div class="prog-step" data-step="2"><div class="prog-dot">2</div><span class="prog-label">Brand</span></div>
+  <div class="prog-step" data-step="3"><div class="prog-dot">3</div><span class="prog-label">Project</span></div>
+  <div class="prog-step" data-step="4"><div class="prog-dot">4</div><span class="prog-label">Content</span></div>
+  <div class="prog-step" data-step="5"><div class="prog-dot">5</div><span class="prog-label">Review</span></div>
+</div>
+
+<div class="wizard">
+
+  <!-- STEP 1: CLIENT INFO -->
+  <div class="step active" data-step="1">
+    <div class="step-title">Who is <span>the client</span>?</div>
+    <div class="step-sub">Start with the basics. We'll use this to auto-enrich your collection with relevant data from connected tools.</div>
+
+    <div class="connectors">
+      <div class="connector" id="connHubspot" onclick="toggleConnector(this,'hubspot')">
+        <div class="connector-icon">&#x1F4CA;</div>
+        <div class="connector-name">HubSpot</div>
+        <div class="connector-status">Click to connect</div>
+      </div>
+      <div class="connector" id="connClay" onclick="toggleConnector(this,'clay')">
+        <div class="connector-icon">&#x1F9F1;</div>
+        <div class="connector-name">Clay</div>
+        <div class="connector-status">Click to connect</div>
+      </div>
+      <div class="connector" id="connClaude" onclick="toggleConnector(this,'claude')">
+        <div class="connector-icon">&#x1F916;</div>
+        <div class="connector-name">Claude AI</div>
+        <div class="connector-status">Click to connect</div>
+      </div>
+    </div>
+
+    <div class="field"><label class="field-label">Company Name *</label><input class="field-input" id="wCompany" placeholder="e.g. HappyBeing"></div>
+    <div class="field-row">
+      <div class="field"><label class="field-label">Website</label><input class="field-input" id="wWebsite" placeholder="https://"></div>
+      <div class="field"><label class="field-label">Instagram / Social</label><input class="field-input" id="wSocial" placeholder="@handle or URL"></div>
+    </div>
+    <div class="field"><label class="field-label">Contact Name</label><input class="field-input" id="wContact" placeholder="Point of contact"></div>
+    <div class="field"><label class="field-label">Notes</label><textarea class="field-input" id="wNotes" placeholder="Any context about the relationship, project scope, etc."></textarea></div>
+
+    <div class="step-nav">
+      <a href="kartel-creative-v2.html" class="nav-back">Cancel</a>
+      <button class="nav-next" onclick="goStep(2)">Next &rarr;</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: BRAND IDENTITY -->
+  <div class="step" data-step="2">
+    <div class="step-title">Define the <span>brand</span></div>
+    <div class="step-sub">Upload logos, screenshots, or any brand material. We'll extract colors and set the visual tone for their private collection.</div>
+
+    <div class="field">
+      <label class="field-label">Upload Source Material</label>
+      <div class="upload-zone" id="brandUploadZone" onclick="document.getElementById('brandFileInput').click()" ondrop="handleBrandDrop(event)" ondragover="event.preventDefault();this.classList.add('dragover')" ondragleave="this.classList.remove('dragover')">
+        <div class="uz-icon">&#x1F3A8;</div>
+        <div class="uz-text">Drop images, logos, or screenshots here</div>
+        <div class="uz-hint">PNG, JPG, SVG — we'll extract brand colors automatically</div>
+      </div>
+      <input type="file" id="brandFileInput" accept="image/*" multiple style="display:none" onchange="handleBrandFiles(this.files)">
+      <div class="uploaded-previews" id="brandPreviews"></div>
+    </div>
+
+    <div id="extractedColorsWrap" style="display:none">
+      <div class="extracted-colors" id="extractedColors">
+        <span class="ec-label">Extracted</span>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:20px">
+      <label class="field-label">Accent Color</label>
+      <div class="field-hint" style="margin-bottom:8px">Choose a color or click an extracted swatch above</div>
+      <div class="color-row">
+        <div class="color-swatch" style="background:#5EC89E" data-color="#5EC89E" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#298DC1" data-color="#298DC1" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#E08A3C" data-color="#E08A3C" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#D94FD5" data-color="#D94FD5" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#C74040" data-color="#C74040" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#5B7FFF" data-color="#5B7FFF" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#E6C84E" data-color="#E6C84E" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#1DB954" data-color="#1DB954" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#FF6B35" data-color="#FF6B35" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#8B5CF6" data-color="#8B5CF6" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#06B6D4" data-color="#06B6D4" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#EC4899" data-color="#EC4899" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#F59E0B" data-color="#F59E0B" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#10B981" data-color="#10B981" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#EF4444" data-color="#EF4444" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#6366F1" data-color="#6366F1" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#F472B6" data-color="#F472B6" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#A78BFA" data-color="#A78BFA" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#34D399" data-color="#34D399" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#FBBF24" data-color="#FBBF24" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#FB923C" data-color="#FB923C" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#38BDF8" data-color="#38BDF8" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#818CF8" data-color="#818CF8" onclick="pickColor(this)"></div>
+        <div class="color-swatch" style="background:#E879F9" data-color="#E879F9" onclick="pickColor(this)"></div>
+        <div class="color-custom"><input type="color" value="#5EC89E" onchange="pickCustomColor(this)"></div>
+      </div>
+      <div style="margin-top:10px;display:flex;align-items:center;gap:8px">
+        <label class="field-hint" style="margin:0;white-space:nowrap">Or enter hex:</label>
+        <input class="field-input" id="customHexInput" placeholder="#000000" style="width:120px;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:8px 12px" oninput="if(/^#[0-9a-fA-F]{6}$/.test(this.value)){selectedColor=this.value;document.querySelectorAll('.color-swatch,.extracted-dot').forEach(s=>s.classList.remove('active'))}">
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="nav-back" onclick="goStep(1)">&larr; Back</button>
+      <div><button class="nav-skip" onclick="goStep(3)">Skip</button>&nbsp;&nbsp;<button class="nav-next" onclick="goStep(3)">Next &rarr;</button></div>
+    </div>
+  </div>
+
+  <!-- STEP 3: PROJECT DETAILS -->
+  <div class="step" data-step="3">
+    <div class="step-title">What's the <span>project</span>?</div>
+    <div class="step-sub">This helps us auto-recommend the most relevant videos from Kartel's catalog for this client.</div>
+
+    <div class="field">
+      <label class="field-label">Industry</label>
+      <div class="industry-pills" id="industryPills">
+        <div class="ind-pill" data-ind="health" onclick="toggleIndustry(this)">Health & Wellness</div>
+        <div class="ind-pill" data-ind="cpg" onclick="toggleIndustry(this)">CPG / Consumer</div>
+        <div class="ind-pill" data-ind="fashion" onclick="toggleIndustry(this)">Fashion & Beauty</div>
+        <div class="ind-pill" data-ind="tech" onclick="toggleIndustry(this)">Tech / SaaS</div>
+        <div class="ind-pill" data-ind="realestate" onclick="toggleIndustry(this)">Real Estate</div>
+        <div class="ind-pill" data-ind="entertainment" onclick="toggleIndustry(this)">Entertainment</div>
+        <div class="ind-pill" data-ind="luxury" onclick="toggleIndustry(this)">Luxury / Auto</div>
+        <div class="ind-pill" data-ind="food" onclick="toggleIndustry(this)">Food & Beverage</div>
+        <div class="ind-pill" data-ind="industrial" onclick="toggleIndustry(this)">Industrial / B2B</div>
+        <div class="ind-pill" data-ind="other" onclick="toggleIndustry(this)">Other</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Product / Service</label>
+      <input class="field-input" id="wProduct" placeholder="e.g. Organic supplements, luxury handbags, EV platform...">
+    </div>
+
+    <div class="field">
+      <label class="field-label">Deliverable Types Needed</label>
+      <div class="del-checks">
+        <div class="del-check" data-del="commercial" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Commercial / Ad</span></div>
+        <div class="del-check" data-del="brandfilm" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Brand Film</span></div>
+        <div class="del-check" data-del="social" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Social Content</span></div>
+        <div class="del-check" data-del="product" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Product Video</span></div>
+        <div class="del-check" data-del="sizzle" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Sizzle Reel</span></div>
+        <div class="del-check" data-del="musicvideo" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Music Video</span></div>
+        <div class="del-check" data-del="event" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Event / Recap</span></div>
+        <div class="del-check" data-del="workflow" onclick="toggleDel(this)"><div class="del-check-box">&#x2713;</div><span class="del-check-label">Workflow / Demo</span></div>
+      </div>
+    </div>
+
+    <div class="step-nav">
+      <button class="nav-back" onclick="goStep(2)">&larr; Back</button>
+      <button class="nav-next" onclick="autoGenerate();goStep(4)">Generate Collection &rarr;</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: CONTENT SELECTION -->
+  <div class="step" data-step="4">
+    <div class="step-title">Curate the <span>content</span></div>
+    <div class="step-sub">We've auto-selected videos based on your inputs. Add or remove as needed.</div>
+
+    <div class="rec-label">&#x2728; Recommended for this client</div>
+    <div class="vs-cat-filter" id="vsCatFilter"></div>
+    <div class="video-select-grid" id="videoSelectGrid"></div>
+
+    <div class="step-nav">
+      <button class="nav-back" onclick="goStep(3)">&larr; Back</button>
+      <button class="nav-next" onclick="goStep(5)">Review &rarr;</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: REVIEW & PUBLISH -->
+  <div class="step" data-step="5">
+    <div class="step-title"><span>Review</span> & publish</div>
+    <div class="step-sub">Here's a preview of the private collection. Everything is customizable after publishing via the admin panel.</div>
+
+    <div class="preview-card" id="previewCard"></div>
+
+    <div class="field-row">
+      <div class="field"><label class="field-label">Access Password</label><input class="field-input" id="wPassword" style="font-family:'JetBrains Mono',monospace;letter-spacing:1px"></div>
+      <div class="field"><label class="field-label">Badge Text</label><input class="field-input" id="wBadge" value="PRIVATE COLLECTION" placeholder="e.g. VIP ACCESS"></div>
+    </div>
+
+    <div class="step-nav">
+      <button class="nav-back" onclick="goStep(4)">&larr; Back</button>
+      <button class="nav-next" onclick="publishCollection()" style="padding:12px 40px;font-size:.78rem">Publish Collection &#x2713;</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ═══ VIDEO CATALOG (same as main platform) ═══
+const videos=[
+  {cat:"Demos",name:"Kartel Demo",id:"1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5"},
+  {cat:"Demos",name:"Kartel Scaling Creative Cut",id:"1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p"},
+  {cat:"Demos Real Estate",name:"Real Estate STU (Affordable)",id:"1Bp_e1fADPWx5D70vkGchuWQZNnOZ55Gh"},
+  {cat:"Commercials",name:"Kartel Real Estate — Affordable",id:"1aAm4kmzNMjH7Xg7iA-NFipBh0T-Ibw9c"},
+  {cat:"Commercials",name:"ChatLabs — Elizabeth Gage",id:"1Exgnr166bnJhOkHTd4fFvNetW-ruEKBN"},
+  {cat:"Commercials",name:"Newell Bubba (H264)",id:"1OM-EYPi7KP_7TrWfByaXKfO8XTzIt3jH"},
+  {cat:"Commercials",name:"McGrath Kavinoky — 4K Final",id:"1dqd7Zmi3-y14IQWVaSGyvtyzrrjzgeEM"},
+  {cat:"Commercials",name:"LIDL Weekly Deals (4x5)",id:"1r67IMWvV8nxzrL-yhYYnlY5pu-Xcr2pL"},
+  {cat:"Commercials",name:"LIDL Spot 16x9",id:"1iDeGzhof4UkD8hbBpArS93gNkEEqurXY"},
+  {cat:"Commercials",name:"Netflix Final",id:"1IU5V3fiMum-rLF1ilrY1OHqi-DsGnAcC"},
+  {cat:"Commercials",name:"Rikai Fashion Ad",id:"1_tPCqqyAz8DfQ_G9iLEz9aWeT-OEVeHc"},
+  {cat:"Commercials",name:"Traditional Grey",id:"1sIsOsGK1QpZISQLeYsTbbhG-B8XFQQTV"},
+  {cat:"Commercials",name:"Traditional Green",id:"1wvS6F5stJybGjh3oUUT_1At7S-RX_JSx"},
+  {cat:"Commercials",name:"Everyday Dose",id:"1ra66S_KzowwPiC9iWF2WFXOfx6B9hWvW"},
+  {cat:"Commercials",name:"Laser Eye Center V6",id:"1_bEXregXgD1eJMW7hW6gsvfGhN5QACrd"},
+  {cat:"Commercials",name:"Thesis Clarity 1x1 V2",id:"1Fp5DmNUJBC3eMhgPfPkAKReduwZ6NVOi"},
+  {cat:"Commercials",name:"NEB Wolverine 16x9 HD",id:"178_zdHJFIFbh_zYCMZu9pOd0SkRw1uqv"},
+  {cat:"Commercials",name:"NEB Wolverine 4x5",id:"13pbOCEeo7hoNiesEucTMlZ5yrm2LDfCC"},
+  {cat:"Commercials",name:"Myosin — Alter Me V1",id:"1kpdzeOMjrw9YIPdQHcgTfx3S6V4-VuI3"},
+  {cat:"Commercials",name:"Audien — Know Your Ears V5",id:"1zR83YQTM0BWOC1se0BHLRpZ8KVVrOQdu"},
+  {cat:"Commercials",name:"Froya Hero Video",id:"1w3Z3aGz8Ae3LwdW4ik_PplxuD3uX3dkA"},
+  {cat:"Commercials",name:"Froya V1",id:"1Fh-wzffpgI5sMf3vSkfaz4IUJ4H1BryW"},
+  {cat:"Commercials",name:"Froya V2 w/ VO",id:"1WuEsMUM3jfeZuobcI8_4MSlT8iHsjXuL"},
+  {cat:"Commercials Spec",name:"BMW Spec Ad",id:"1wcAnerqRvyv1Wb7BOpRLSCP1uTPKaekP"},
+  {cat:"Music Videos",name:"Bryan Adams",id:"1OvoSkDPC08bygAJC8NjGq8ih8GkxO-Nz"},
+  {cat:"Music Videos",name:"Baby Teeth — Master 4K",id:"1VwdlS5KpdT8D72oVZVzjEeI_vWjX2Ipa"},
+  {cat:"Music Videos",name:"Multi-Flaskin Final",id:"1aRsLVqkoaVLbDGrnATWQwS_2Rfj2X2h5"},
+  {cat:"Music Videos",name:"Yes and Maybe — Final",id:"1pu2Xg10yVtJJ431k_t5Qjum56U2cu1Xc"},
+  {cat:"Short Film",name:"Don't Call Me Lucky — Trailer",id:"1lsr3BZ05jLxepxKX3CdskwqeMWzIysdt"},
+  {cat:"TV",name:"Stingray R1 Package",id:"1V7ehJOYzbPfqaAaRnJ0jVlycLDCN9SCF"},
+  {cat:"TV",name:"Queen Corgi R1 Package",id:"1CaY_UyN5ym7tf5-8H-YHCa6wtk0sYiPQ"},
+  {cat:"Demo Elements",name:"New Reel Master",id:"1aTMvhs35gd6B_0fLM6M3xbV_EtdAczAQ"},
+  {cat:"Website",name:"Adidas Web",id:"1_QCdrPJORpK2E3k1EYNdrbAvnvuuT1fc"},
+  {cat:"Website",name:"Porsche Web",id:"1MtpDJvibVf7OiRurhkskHS5h_kR18Zis"},
+  {cat:"Website",name:"Heny Web",id:"1oA3n0NhCH39zHIyLBgGl8x-jfeGzd9qb"},
+  {cat:"Demo Elements",name:"Sephora Spec Ad",id:"12sdmCk_-mUk4yBKqiMxDNUCnCevrSLHb"},
+  {cat:"Demo Elements",name:"Rikai Fashion Ad (Sample)",id:"15UUIEBN0Rh0KFkHnmCbGRwf4MOl9xCaJ"},
+  {cat:"Demo Elements",name:"Osea Horizontal V1",id:"1Eh9jMiHDmI4k9nCbHy2m-LPC7BiRRS_E"},
+  {cat:"Workflows",name:"CIP Client Review Workflow",id:"13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8"},
+  {cat:"Workflows",name:"Marc Jacobs Workflow (ComfyUI)",id:"13PjUFyWHFqTN0tJhpnb8EwaOsfTFAkW3"},
+  {cat:"Workflows",name:"Car Workflow",id:"1GYhFPKEF4068f384EKzEM8rdquvYvzjg"},
+  {cat:"Promo",name:"Kartel CBS News Clip",id:"18gVdXetyWeWPLpk4j5XdMUzW7-zETAbA"},
+  {cat:"Promo",name:"Kartel K (Vishal)",id:"10iFr2ALzWXmOp1YWwHmgTyqLw0_cSxKV"},
+];
+
+// ═══ INDUSTRY → VIDEO MATCHING ═══
+const industryMap = {
+  health:     ["Everyday Dose","Froya","Thesis","Osea","Audien"],
+  cpg:        ["LIDL","Newell","NEB Wolverine","Bubba"],
+  fashion:    ["Rikai","Sephora","Traditional","Marc Jacobs","Adidas"],
+  tech:       ["CIP","Car Workflow","Kartel Scaling"],
+  realestate: ["Real Estate","Kartel Real Estate"],
+  entertainment: ["Masked Singer","Bryan Adams","Baby Teeth","Multi-Flaskin","Don't Call Me Lucky","Yes and Maybe"],
+  luxury:     ["BMW","Porsche","Heny","Adidas","Rikai"],
+  food:       ["Everyday Dose","LIDL","Froya"],
+  industrial: ["Car Workflow","CIP","Marc Jacobs","Newell"],
+  other:      ["Kartel Demo","New Reel Master","Netflix"]
+};
+const delTypeMap = {
+  commercial: ["Commercials","Commercials Spec"],
+  brandfilm:  ["Commercials","Short Film","Music Videos"],
+  social:     ["Commercials","Demo Elements","Promo","Website"],
+  product:    ["Demo Elements","Commercials","Website"],
+  sizzle:     ["Demos","Demo Elements","Promo"],
+  musicvideo: ["Music Videos"],
+  event:      ["Short Film","TV","Promo","Competitions"],
+  workflow:   ["Workflows"]
+};
+
+// ═══ STATE ═══
+let currentStep = 1;
+let selectedColor = null;
+let selectedIndustries = new Set();
+let selectedDelTypes = new Set();
+let selectedVideoIds = new Set();
+let brandImages = [];
+let extractedColors = [];
+
+// ═══ NAVIGATION ═══
+function goStep(n) {
+  if (n === 2) { if (!document.getElementById('wCompany').value.trim()) { document.getElementById('wCompany').focus(); return; } }
+  if (n === 4) autoGenerate();
+  if (n === 5) renderPreview();
+  currentStep = n;
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+  document.querySelectorAll('.prog-step').forEach(s => {
+    const sn = parseInt(s.dataset.step);
+    s.classList.toggle('active', sn === n);
+    s.classList.toggle('done', sn < n);
+  });
+  window.scrollTo(0, 0);
+  // Auto-generate password on step 5
+  if (n === 5) {
+    const slug = document.getElementById('wCompany').value.trim().replace(/[^a-zA-Z0-9]/g,'').substring(0,4).toUpperCase();
+    document.getElementById('wPassword').value = document.getElementById('wPassword').value || `${slug}-Kartel2026`;
+  }
+}
+
+// ═══ CONNECTORS ═══
+function toggleConnector(el, name) {
+  el.classList.toggle('connected');
+  el.querySelector('.connector-status').textContent = el.classList.contains('connected') ? 'Connected' : 'Click to connect';
+}
+
+// ═══ COLORS ═══
+function pickColor(el) {
+  document.querySelectorAll('.color-swatch,.extracted-dot').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  selectedColor = el.dataset.color || el.style.background;
+}
+function pickCustomColor(input) {
+  selectedColor = input.value;
+  document.querySelectorAll('.color-swatch,.extracted-dot').forEach(s => s.classList.remove('active'));
+}
+
+// ═══ BRAND IMAGE UPLOAD + COLOR EXTRACTION ═══
+function handleBrandDrop(e) {
+  e.preventDefault();
+  document.getElementById('brandUploadZone').classList.remove('dragover');
+  handleBrandFiles(e.dataTransfer.files);
+}
+function handleBrandFiles(files) {
+  for (const f of files) {
+    if (!f.type.startsWith('image/')) continue;
+    const url = URL.createObjectURL(f);
+    brandImages.push({ name: f.name, url });
+    extractColorsFromImage(url);
+  }
+  renderBrandPreviews();
+}
+function renderBrandPreviews() {
+  document.getElementById('brandPreviews').innerHTML = brandImages.map((img, i) =>
+    `<div class="uploaded-preview"><img src="${img.url}"><button class="up-remove" onclick="brandImages.splice(${i},1);renderBrandPreviews()">×</button></div>`
+  ).join('');
+}
+function extractColorsFromImage(url) {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 100; canvas.height = 100;
+    ctx.drawImage(img, 0, 0, 100, 100);
+    const data = ctx.getImageData(0, 0, 100, 100).data;
+    // Sample colors from different regions
+    const samples = [];
+    const regions = [[25,25],[75,25],[50,50],[25,75],[75,75],[10,10],[90,90],[50,10],[50,90]];
+    regions.forEach(([x,y]) => {
+      const i = (y * 100 + x) * 4;
+      const r = data[i], g = data[i+1], b = data[i+2];
+      if (r + g + b > 40 && r + g + b < 720) { // skip near-black/white
+        const hex = '#' + [r,g,b].map(c => c.toString(16).padStart(2,'0')).join('');
+        if (!samples.includes(hex)) samples.push(hex);
+      }
+    });
+    extractedColors = [...new Set([...extractedColors, ...samples])].slice(0, 8);
+    renderExtractedColors();
+  };
+  img.src = url;
+}
+function renderExtractedColors() {
+  if (!extractedColors.length) return;
+  document.getElementById('extractedColorsWrap').style.display = '';
+  const wrap = document.getElementById('extractedColors');
+  wrap.innerHTML = '<span class="ec-label">Extracted</span>' +
+    extractedColors.map(c => `<div class="extracted-dot" style="background:${c}" data-color="${c}" onclick="pickColor(this)"></div>`).join('');
+}
+
+// ═══ INDUSTRY / DELIVERABLE SELECTION ═══
+function toggleIndustry(el) { el.classList.toggle('active'); const ind = el.dataset.ind; selectedIndustries.has(ind) ? selectedIndustries.delete(ind) : selectedIndustries.add(ind); }
+function toggleDel(el) { el.classList.toggle('active'); const d = el.dataset.del; selectedDelTypes.has(d) ? selectedDelTypes.delete(d) : selectedDelTypes.add(d); }
+
+// ═══ AUTO-GENERATE ═══
+function autoGenerate() {
+  selectedVideoIds.clear();
+  // Score each video by relevance
+  const scores = videos.map(v => {
+    let score = 0;
+    // Industry match — check if video name contains industry keywords
+    selectedIndustries.forEach(ind => {
+      const keywords = industryMap[ind] || [];
+      keywords.forEach(kw => { if (v.name.toLowerCase().includes(kw.toLowerCase())) score += 10; });
+    });
+    // Deliverable type match — check category
+    selectedDelTypes.forEach(dt => {
+      const cats = delTypeMap[dt] || [];
+      cats.forEach(c => { if (v.cat.startsWith(c) || v.cat === c) score += 8; });
+    });
+    // Always include demo/reel as baseline
+    if (v.cat === 'Demos' || v.name.includes('Reel') || v.name.includes('Demo')) score += 2;
+    return { ...v, score };
+  });
+
+  // Select top-scoring videos (at least 6, up to 15)
+  scores.sort((a, b) => b.score - a.score);
+  const recommended = scores.filter(v => v.score > 0).slice(0, 15);
+  if (recommended.length < 6) {
+    const filler = scores.filter(v => v.score === 0).slice(0, 6 - recommended.length);
+    recommended.push(...filler);
+  }
+  recommended.forEach(v => selectedVideoIds.add(v.id));
+  renderVideoGrid();
+}
+
+// ═══ VIDEO SELECTION GRID ═══
+function renderVideoGrid() {
+  const grid = document.getElementById('videoSelectGrid');
+  const filterWrap = document.getElementById('vsCatFilter');
+  const allCats = [...new Set(videos.map(v => v.cat))];
+
+  // Filters
+  filterWrap.innerHTML = `<button class="vs-cat-btn active" onclick="filterVS(null,this)">All</button>` +
+    allCats.map(c => `<button class="vs-cat-btn" onclick="filterVS('${c.replace(/'/g,"\\'")}',this)">${c.replace(/.*— /,'')}</button>`).join('');
+
+  // Cards — recommended first
+  const sorted = [...videos].sort((a, b) => (selectedVideoIds.has(b.id) ? 1 : 0) - (selectedVideoIds.has(a.id) ? 1 : 0));
+  grid.innerHTML = sorted.map(v => `
+    <div class="vs-card ${selectedVideoIds.has(v.id)?'selected':''}" data-id="${v.id}" data-cat="${v.cat}" onclick="toggleVideo('${v.id}',this)">
+      <div class="vs-thumb"><img src="https://lh3.googleusercontent.com/d/${v.id}=w320-h180-p-k-nu-iv1" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="vs-name">${v.name}</div>
+    </div>`).join('');
+}
+function toggleVideo(id, el) {
+  if (selectedVideoIds.has(id)) { selectedVideoIds.delete(id); el.classList.remove('selected'); }
+  else { selectedVideoIds.add(id); el.classList.add('selected'); }
+}
+function filterVS(cat, btn) {
+  document.querySelectorAll('.vs-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.vs-card').forEach(c => {
+    c.style.display = (!cat || c.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+// ═══ PREVIEW ═══
+function renderPreview() {
+  const company = document.getElementById('wCompany').value.trim();
+  const desc = document.getElementById('wNotes').value.trim() || `A curated selection of Kartel's creative work for ${company}.`;
+  const accent = selectedColor || '#5EC89E';
+  const selectedVids = videos.filter(v => selectedVideoIds.has(v.id));
+
+  document.getElementById('previewCard').innerHTML = `
+    <div class="preview-hero" style="border-left:3px solid ${accent}">
+      <div class="ph-brands"><span class="ph-kartel">KARTEL</span><span class="ph-x">&times;</span><span class="ph-client" style="color:${accent}">${company.toUpperCase()}</span></div>
+      <div class="ph-title">Curated for <span style="color:${accent}">${company}</span></div>
+      <div class="ph-desc">${desc}</div>
+    </div>
+    <div class="preview-videos">
+      ${selectedVids.slice(0, 8).map(v => `
+        <div class="pv-card">
+          <div class="pv-thumb"><img src="https://lh3.googleusercontent.com/d/${v.id}=w240-h135-p-k-nu-iv1" loading="lazy" onerror="this.style.display='none'"></div>
+          <div class="pv-name">${v.name}</div>
+        </div>`).join('')}
+      ${selectedVids.length > 8 ? `<div class="pv-card" style="display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;color:var(--text-muted);font-size:.65rem">+${selectedVids.length - 8} more</div>` : ''}
+    </div>`;
+}
+
+// ═══ PUBLISH ═══
+function publishCollection() {
+  const company = document.getElementById('wCompany').value.trim();
+  if (!company) { alert('Company name is required'); goStep(1); return; }
+
+  const slug = company.toLowerCase().replace(/[^a-z0-9]/g,'');
+  const accent = selectedColor || '#5EC89E';
+  const password = document.getElementById('wPassword').value || `${slug.substring(0,4).toUpperCase()}-Kartel2026`;
+  const badge = document.getElementById('wBadge').value || 'PRIVATE COLLECTION';
+  const desc = document.getElementById('wNotes').value.trim() || `A curated selection of Kartel's creative work for ${company}.`;
+  const selectedVids = videos.filter(v => selectedVideoIds.has(v.id));
+
+  // Build sections from selected videos grouped by category
+  const catGroups = {};
+  selectedVids.forEach(v => {
+    if (!catGroups[v.cat]) catGroups[v.cat] = [];
+    catGroups[v.cat].push({ name: v.name, id: v.id, cat: v.cat });
+  });
+  const sections = Object.entries(catGroups).map(([cat, vids]) => ({
+    name: cat, barColor: 'client', videos: vids
+  }));
+  // Add capabilities section
+  const kapVids = videos.filter(v => v.name.includes('Kartel Demo') || v.name.includes('Reel Master') || v.name.includes('CBS News'));
+  if (kapVids.length && !selectedVids.some(v => v.name.includes('Kartel Demo'))) {
+    sections.push({ name: 'Kartel Capabilities', barColor: 'green', videos: kapVids.map(v => ({ name: v.name, id: v.id, cat: 'Reel' })) });
+  }
+
+  // Compute glow/dim from accent
+  const r = parseInt(accent.slice(1,3),16), g = parseInt(accent.slice(3,5),16), b = parseInt(accent.slice(5,7),16);
+
+  const collection = {
+    client: company,
+    accent,
+    accentGlow: `rgba(${r},${g},${b},0.15)`,
+    accentDim: `rgba(${r},${g},${b},0.4)`,
+    password,
+    badge,
+    title: `Curated for <span>${company}</span>`,
+    desc,
+    sowDeliverables: null,
+    sowFileName: null,
+    sections
+  };
+
+  // Save to localStorage
+  let cols = {};
+  try { cols = JSON.parse(localStorage.getItem('kartel_collections') || '{}'); } catch(e) {}
+  cols[slug] = collection;
+  localStorage.setItem('kartel_collections', JSON.stringify(cols));
+
+  // Redirect to the collection
+  const viewUrl = `kartel-view.html?collection=${slug}`;
+  const confirmed = confirm(`Collection published!\n\nClient: ${company}\nPassword: ${password}\nVideos: ${selectedVids.length}\nLink: ${viewUrl}\n\nOpen the collection now?`);
+  if (confirmed) window.open(viewUrl, '_blank');
+  window.location.href = 'kartel-creative-v2.html';
+}
+</script>
+</body>
+</html>

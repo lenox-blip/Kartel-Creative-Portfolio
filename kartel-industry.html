@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kartel AI — Industry Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Outfit', sans-serif;
+      background: #050505;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='2'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Z-index stacking */
+    body > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -1px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    /* Logo & SVG symbols */
+    svg {
+      display: block;
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+    }
+
+    .logo-lg {
+      width: 160px;
+      height: auto;
+    }
+
+    /* Play icon */
+    .play-icon {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      transition: opacity 0.3s;
+    }
+
+    /* Animated grid background for login */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(0deg, rgba(0, 140, 50, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 140, 50, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridShift 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes gridShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header */
+    header {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-logo {
+      color: #008C32;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 1px;
+    }
+
+    .header-logo svg {
+      color: #008C32;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #999;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    /* Password gate */
+    .password-gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 2rem;
+    }
+
+    .password-gate.hidden {
+      display: none;
+    }
+
+    .password-gate .grid-bg {
+      z-index: -1;
+    }
+
+    .password-form {
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      background: rgba(5, 5, 5, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 3rem;
+      border-radius: 8px;
+    }
+
+    .password-form .logo-lg {
+      margin-bottom: 2rem;
+      color: #008C32;
+    }
+
+    .password-form h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .password-form p {
+      margin-bottom: 2rem;
+      color: #999;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: #999;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #008C32;
+    }
+
+    .form-group input.error {
+      border-color: #ff4444;
+    }
+
+    .form-group.error-msg {
+      color: #ff4444;
+      font-size: 0.85rem;
+      text-transform: none;
+      margin-top: 0.5rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #008C32;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: #00a63d;
+    }
+
+    button:active {
+      background: #007a28;
+    }
+
+    /* Main content */
+    main {
+      padding: 4rem 0;
+    }
+
+    main.hidden {
+      display: none;
+    }
+
+    /* Directory page */
+    .directory {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 0;
+    }
+
+    .directory-header {
+      text-align: center;
+      margin-bottom: 6rem;
+    }
+
+    .directory-header h1 {
+      margin-bottom: 1rem;
+    }
+
+    .directory-header p {
+      font-size: 1.1rem;
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .industry-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .industry-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: currentColor;
+    }
+
+    .industry-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .industry-card h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .industry-card p {
+      font-size: 0.95rem;
+      margin: 0;
+      flex: 1;
+    }
+
+    .industry-card .accent {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: currentColor;
+      font-weight: 600;
+    }
+
+    /* Hero section */
+    .hero {
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(0, 140, 50, 0.15) 0%, rgba(0, 0, 0, 0) 100%);
+      border: 1px solid rgba(0, 140, 50, 0.3);
+      padding: 3rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-banner.branded {
+      background: linear-gradient(135deg, rgba(0, 140, 50, 0.25) 0%, rgba(0, 0, 0, 0) 100%);
+      border-color: rgba(0, 140, 50, 0.5);
+    }
+
+    .hero-banner h1 {
+      margin-bottom: 1rem;
+    }
+
+    .hero-banner .branding {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-banner .branding svg {
+      width: 100px;
+      color: #008C32;
+    }
+
+    .hero-banner .company-name {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hero-banner p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 700px;
+    }
+
+    /* Video sections */
+    .video-section {
+      margin-bottom: 4rem;
+    }
+
+    .video-section h3 {
+      position: relative;
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    .video-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: currentColor;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .video-card {
+      aspect-ratio: 16 / 9;
+      background: #111;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: scale(1.02);
+    }
+
+    .video-card:hover .play-icon {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-card .play-icon:hover {
+      opacity: 1;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.3s;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 1000px;
+      position: relative;
+      animation: slideUp 0.3s;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s;
+    }
+
+    .modal-close:hover {
+      color: #008C32;
+    }
+
+    .video-iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: none;
+      border-radius: 4px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0, 140, 50, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+      border: 1px solid rgba(0, 140, 50, 0.2);
+      padding: 3rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .cta-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.05rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: #008C32;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      background: #00a63d;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .industry-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .password-form {
+        padding: 2rem;
+      }
+
+      .hero-banner {
+        padding: 2rem;
+      }
+
+      .hero-banner h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-banner .company-name {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG Symbols -->
+  <svg style="display: none;">
+    <symbol id="kartel-logo" viewBox="0 0 800 120">
+      <!-- K -->
+      <path d="M10,10 L10,110 L40,110 L40,70 L50,60 L90,110 L130,110 L75,45 L125,10 L88,10 L40,55 L40,10 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+      <!-- A -->
+      <path d="M155,110 L190,10 L220,10 L255,110 L225,110 L215,80 L175,80 L165,110 Z M182,58 L208,58 L195,22 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+      <!-- R -->
+      <path d="M280,10 L280,110 L310,110 L310,70 L330,70 L360,110 L395,110 L358,65 Q385,55 385,37 Q385,10 350,10 Z M310,35 L345,35 Q360,35 360,47 Q360,55 345,55 L310,55 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+      <!-- T -->
+      <path d="M430,35 L430,110 L460,110 L460,35 L500,35 L500,10 L390,10 L390,35 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+      <!-- E -->
+      <path d="M525,10 L525,110 L620,110 L620,85 L555,85 L555,70 L610,70 L610,48 L555,48 L555,35 L618,35 L618,10 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+      <!-- L -->
+      <path d="M645,10 L645,110 L740,110 L740,85 L675,85 L675,10 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter"/>
+    </symbol>
+    <symbol id="play-icon" viewBox="0 0 24 24">
+      <path d="M8 5v14l11-7z" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <!-- Password Gate -->
+  <div class="password-gate" id="passwordGate">
+    <div class="grid-bg"></div>
+    <div class="container">
+      <form class="password-form" id="passwordForm">
+        <svg class="logo-lg" color="#008C32">
+          <use href="#kartel-logo"></use>
+        </svg>
+        <h1>Kartel AI</h1>
+        <p id="gateSubtitle">Enter your collection password</p>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••••"
+            autocomplete="off"
+          >
+          <div id="passwordError" class="form-group error-msg" style="display: none;"></div>
+        </div>
+
+        <button type="submit">Unlock Collection</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Directory Page -->
+  <div id="directoryPage" class="hidden">
+    <div class="container">
+      <div class="directory-header">
+        <h1>Kartel AI</h1>
+        <p>Award-winning AI-powered video production & creative solutions</p>
+      </div>
+
+      <div class="directory">
+        <div class="industry-grid" id="industryGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main id="mainContent" class="hidden">
+    <header class="container">
+      <div class="header-logo">
+        <svg class="logo" color="#008C32">
+          <use href="#kartel-logo"></use>
+        </svg>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" onclick="goToDirectory(); return false;">← Back to Directory</a></li>
+          <li><a href="#" onclick="logout(); return false;">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="hero">
+        <div class="hero-banner" id="heroBanner">
+          <div class="branding">
+            <svg class="logo" color="#008C32">
+              <use href="#kartel-logo"></use>
+            </svg>
+            <span class="company-name" id="heroTitle">Kartel AI</span>
+          </div>
+          <h1 id="heroSubtitle">Creative Solutions</h1>
+          <p id="heroDescription">Explore our portfolio of industry-specific creative work</p>
+        </div>
+      </div>
+
+      <!-- Video Sections -->
+      <div id="videoSectionsContainer"></div>
+
+      <!-- CTA Section -->
+      <div class="cta-section">
+        <h2>Ready to collaborate?</h2>
+        <p id="ctaDescription">Let's discuss how Kartel AI can elevate your creative vision</p>
+        <a href="#" class="cta-button" id="ctaButton">Get in Touch</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Video Modal -->
+  <div class="modal" id="videoModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <iframe
+        class="video-iframe"
+        id="videoIframe"
+        src=""
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Industry data structure
+    const industries = {
+      advertising: {
+        name: 'Advertising & Creative Services',
+        accent: '#E85D75',
+        password: 'KARTEL-CREATIVE2026',
+        description: 'Multi-format commercial packages, brand films, AI workflows, and platform demos',
+        sections: [
+          {
+            title: 'Multi-Format Commercial Packages',
+            videos: [
+              { id: '1r67IMWvV8nxzrL-yhYYnlY5pu-Xcr2pL', name: 'LIDL Weekly Deals 4x5' },
+              { id: '1iDeGzhof4UkD8hbBpArS93gNkEEqurXY', name: 'LIDL Spot 16x9' },
+              { id: '1mC2qjoRkX3NMYfo0nHarFe1eBJGqfIMO', name: 'LIDL Spot 9x16' },
+              { id: '1mgxP15oBBXiYheq265xBhhU4mKfDNLNe', name: 'LIDL Spot 4x5' },
+              { id: '1s7wIBvhUYRc5g6g9Y3eN_fcpyZ98CwAJ', name: 'LIDL Spot 1x1' },
+              { id: '1w76q5KgBdTjyJuaqVkGds-JwDTbl672P', name: 'LIDL Spot B 16x9' },
+              { id: '1Nw1Hz9Fs1f8NYepp4dhoeDOsoiCwR5pG', name: 'LIDL Spot B 9x16' }
+            ]
+          },
+          {
+            title: 'Brand Film & Storytelling',
+            videos: [
+              { id: '1_tPCqqyAz8DfQ_G9iLEz9aWeT-OEVeHc', name: 'Rikai Fashion Ad' },
+              { id: '1Exgnr166bnJhOkHTd4fFvNetW-ruEKBN', name: 'ChatLabs Elizabeth Gage' },
+              { id: '1IU5V3fiMum-rLF1ilrY1OHqi-DsGnAcC', name: 'Netflix Final' },
+              { id: '1dqd7Zmi3-y14IQWVaSGyvtyzrrjzgeEM', name: 'McGrath Kavinoky 4K' },
+              { id: '1ra66S_KzowwPiC9iWF2WFXOfx6B9hWvW', name: 'Everyday Dose' }
+            ]
+          },
+          {
+            title: 'AI-Powered Workflows',
+            videos: [
+              { id: '13PjUFyWHFqTN0tJhpnb8EwaOsfTFAkW3', name: 'Marc Jacobs Workflow' },
+              { id: '13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8', name: 'CIP Client Review' },
+              { id: '1DlTUE5Bew-q_lnAO33mFczyD9a5es6EZ', name: 'CIP Dashboard' },
+              { id: '1x-fhUrbSrNiLIizsDekxyjLRhLGFR7w9', name: 'CIP Upload' }
+            ]
+          },
+          {
+            title: 'Platform Demo',
+            videos: [
+              { id: '1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5', name: 'Kartel Demo' },
+              { id: '1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p', name: 'Scaling Creative Cut' }
+            ]
+          }
+        ]
+      },
+      technology: {
+        name: 'Technology & SaaS',
+        accent: '#4E9FE5',
+        password: 'KARTEL-TECH2026',
+        description: 'Product demos, AI architecture, polished brand content, and motion graphics',
+        sections: [
+          {
+            title: 'Product & Platform Demos',
+            videos: [
+              { id: '1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5', name: 'Kartel Demo' },
+              { id: '1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p', name: 'Scaling Creative Cut' },
+              { id: '1TdLXRO659OK_NB1PkP4Xgw-S1SYUp0Qf', name: 'Kartel Demo Alt' },
+              { id: '1Bp_e1fADPWx5D70vkGchuWQZNnOZ55Gh', name: 'Real Estate STU' }
+            ]
+          },
+          {
+            title: 'AI Workflow Architecture',
+            videos: [
+              { id: '13PjUFyWHFqTN0tJhpnb8EwaOsfTFAkW3', name: 'Marc Jacobs Workflow' },
+              { id: '1GYhFPKEF4068f384EKzEM8rdquvYvzjg', name: 'Car Workflow' },
+              { id: '1w-3tQuThkO02k8sNy851hJ5EeGPaaUNN', name: 'Assassins Teapot' },
+              { id: '13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8', name: 'CIP Client Review' },
+              { id: '1DlTUE5Bew-q_lnAO33mFczyD9a5es6EZ', name: 'CIP Dashboard' }
+            ]
+          },
+          {
+            title: 'Polished Brand Content',
+            videos: [
+              { id: '1IU5V3fiMum-rLF1ilrY1OHqi-DsGnAcC', name: 'Netflix Final' },
+              { id: '1_QCdrPJORpK2E3k1EYNdrbAvnvuuT1fc', name: 'Adidas Web' },
+              { id: '1MtpDJvibVf7OiRurhkskHS5h_kR18Zis', name: 'Porsche Web' },
+              { id: '1wcAnerqRvyv1Wb7BOpRLSCP1uTPKaekP', name: 'BMW Spec Ad' }
+            ]
+          },
+          {
+            title: 'Motion Graphics & Digital Assets',
+            videos: [
+              { id: '1Ffy_H_RC6pQOYjd1lcbsqTdW0C0dpvtW', name: 'Kartel Reel' },
+              { id: '1aTMvhs35gd6B_0fLM6M3xbV_EtdAczAQ', name: 'New Reel Master' },
+              { id: '12sdmCk_-mUk4yBKqiMxDNUCnCevrSLHb', name: 'Sephora Spec Ad' }
+            ]
+          }
+        ]
+      },
+      entertainment: {
+        name: 'Entertainment & Media',
+        accent: '#C77DFF',
+        password: 'KARTEL-MEDIA2026',
+        description: 'Television production, music videos, short films, and behind-the-scenes content',
+        sections: [
+          {
+            title: 'Television Production',
+            videos: [
+              { id: '1V7ehJOYzbPfqaAaRnJ0jVlycLDCN9SCF', name: 'Stingray R1' },
+              { id: '1CaY_UyN5ym7tf5-8H-YHCa6wtk0sYiPQ', name: 'Queen Corgi R1' },
+              { id: '1jU80oFCtLqZX6mrkHnsb0azz1S98IWlO', name: 'Croissants R1' },
+              { id: '1IBhW1UTV8SDRdXALOZtYf3jNSk_AZwAB', name: 'Pugcasso R2' },
+              { id: '1uxVjVzFHBJ_zT12sLeSP1tzUcqBpfGSf', name: 'Handyman R2' },
+              { id: '17e2GFz0gPB1aKQzzV-rfkoUUqkK-ALVL', name: 'Eggplant R1' },
+              { id: '1RnHh1eOKns3_BVM9WQV1nio917fmRrbk', name: 'Eggplant R2' },
+              { id: '1XNOGrxzsjb8RaAe5Aoq2fdhzV-MtgUK4', name: 'Le Who Who R1' }
+            ]
+          },
+          {
+            title: 'Music Videos',
+            videos: [
+              { id: '1OvoSkDPC08bygAJC8NjGq8ih8GkxO-Nz', name: 'Bryan Adams' },
+              { id: '1VwdlS5KpdT8D72oVZVzjEeI_vWjX2Ipa', name: 'Baby Teeth 4K' },
+              { id: '1aRsLVqkoaVLbDGrnATWQwS_2Rfj2X2h5', name: 'Multi-Flaskin' },
+              { id: '1pu2Xg10yVtJJ431k_t5Qjum56U2cu1Xc', name: 'Yes and Maybe' }
+            ]
+          },
+          {
+            title: 'Short Film & Narrative',
+            videos: [
+              { id: '1lsr3BZ05jLxepxKX3CdskwqeMWzIysdt', name: 'Don\'t Call Me Lucky Trailer' },
+              { id: '1-XBonQVIafISbnaOx8wsGxZ5wL9agqdh', name: '2077 Rodeo' },
+              { id: '1NVZgv4Q-kt7IFZAdU775OiAifwloG41c', name: 'Freaky Thangs' },
+              { id: '1Cj1KBsEOMLFpNngv1DPCvnb7aLMnMBh0', name: 'The Fisherman' }
+            ]
+          },
+          {
+            title: 'Behind the Scenes',
+            videos: [
+              { id: '1n8RQeIUj1DP5RgwVrcLAeaMuQAANuFI-', name: 'Director Directing' },
+              { id: '1GlJJWAApKt4RYg3k7dq8XjfuL1bM8CpN', name: 'Empty Studio' },
+              { id: '1CyFMiCRF317fQyTkz4GuGqJqjRfMBsw-', name: 'Video Village Monitor' },
+              { id: '1Ot-BI8g_QZ6LoFLIfzmSSy6aeesGTlOD', name: 'Camera Rig Setup' },
+              { id: '1EbqqL4MfBi6ft1QAG86wdUYdx3n1hoCy', name: 'Director Positioning' }
+            ]
+          }
+        ]
+      },
+      consumer: {
+        name: 'Consumer Brands & Retail',
+        accent: '#F5A623',
+        password: 'KARTEL-BRAND2026',
+        description: 'Product commercials, social content, fashion, and wellness brands',
+        sections: [
+          {
+            title: 'Product Commercials',
+            videos: [
+              { id: '1OM-EYPi7KP_7TrWfByaXKfO8XTzIt3jH', name: 'Newell Bubba' },
+              { id: '178_zdHJFIFbh_zYCMZu9pOd0SkRw1uqv', name: 'NEB Wolverine 16x9' },
+              { id: '1ra66S_KzowwPiC9iWF2WFXOfx6B9hWvW', name: 'Everyday Dose' },
+              { id: '1_bEXregXgD1eJMW7hW6gsvfGhN5QACrd', name: 'Laser Eye Center' },
+              { id: '1sIsOsGK1QpZISQLeYsTbbhG-B8XFQQTV', name: 'Traditional Grey' },
+              { id: '1wvS6F5stJybGjh3oUUT_1At7S-RX_JSx', name: 'Traditional Green' }
+            ]
+          },
+          {
+            title: 'Multi-Format Social & Retail',
+            videos: [
+              { id: '13pbOCEeo7hoNiesEucTMlZ5yrm2LDfCC', name: 'NEB Wolverine 4x5' },
+              { id: '1wLYYVWbqV9wycY0E6HQDi2LIcfSVJTUR', name: 'NEB Wolverine 9x16' },
+              { id: '1r67IMWvV8nxzrL-yhYYnlY5pu-Xcr2pL', name: 'LIDL Weekly Deals 4x5' },
+              { id: '1Fp5DmNUJBC3eMhgPfPkAKReduwZ6NVOi', name: 'Thesis Clarity 1x1' },
+              { id: '14rpOCo-zIynGFP7_kYXo-cZEr0Y86sy6', name: 'Thesis Clarity 9x16' },
+              { id: '1Eh9jMiHDmI4k9nCbHy2m-LPC7BiRRS_E', name: 'Osea Horizontal' },
+              { id: '1LivWBd9F8DE44lLBHEwbyDJ4afUd3z2y', name: 'Osea Vertical' }
+            ]
+          },
+          {
+            title: 'Fashion & Lifestyle',
+            videos: [
+              { id: '1_tPCqqyAz8DfQ_G9iLEz9aWeT-OEVeHc', name: 'Rikai Fashion Ad' },
+              { id: '15UUIEBN0Rh0KFkHnmCbGRwf4MOl9xCaJ', name: 'Rikai Sample' },
+              { id: '1_QCdrPJORpK2E3k1EYNdrbAvnvuuT1fc', name: 'Adidas Web' },
+              { id: '1wcAnerqRvyv1Wb7BOpRLSCP1uTPKaekP', name: 'BMW Spec Ad' }
+            ]
+          },
+          {
+            title: 'Health & Wellness',
+            videos: [
+              { id: '1kpdzeOMjrw9YIPdQHcgTfx3S6V4-VuI3', name: 'Myosin Alter Me V1' },
+              { id: '1zR83YQTM0BWOC1se0BHLRpZ8KVVrOQdu', name: 'Audien Know Your Ears' },
+              { id: '1w3Z3aGz8Ae3LwdW4ik_PplxuD3uX3dkA', name: 'Froya Hero' },
+              { id: '1v6C2jlU5VgSxO5uSeTuZMeHpKg1yOnC9', name: 'Froya 30s' }
+            ]
+          }
+        ]
+      },
+      finance: {
+        name: 'Finance & Professional Services',
+        accent: '#5B8C6E',
+        password: 'KARTEL-PRO2026',
+        description: 'Corporate films, platform presentations, multi-format delivery, and workflows',
+        sections: [
+          {
+            title: 'Corporate Brand Films',
+            videos: [
+              { id: '1IU5V3fiMum-rLF1ilrY1OHqi-DsGnAcC', name: 'Netflix Final' },
+              { id: '1Exgnr166bnJhOkHTd4fFvNetW-ruEKBN', name: 'ChatLabs Elizabeth Gage' },
+              { id: '1dqd7Zmi3-y14IQWVaSGyvtyzrrjzgeEM', name: 'McGrath Kavinoky 4K' },
+              { id: '1aAm4kmzNMjH7Xg7iA-NFipBh0T-Ibw9c', name: 'Kartel Real Estate' }
+            ]
+          },
+          {
+            title: 'Platform & Product Presentation',
+            videos: [
+              { id: '1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5', name: 'Kartel Demo' },
+              { id: '1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p', name: 'Scaling Creative Cut' },
+              { id: '1MtpDJvibVf7OiRurhkskHS5h_kR18Zis', name: 'Porsche Web' },
+              { id: '1oA3n0NhCH39zHIyLBgGl8x-jfeGzd9qb', name: 'Heny Web' }
+            ]
+          },
+          {
+            title: 'Controlled Multi-Format Delivery',
+            videos: [
+              { id: '1f87B913pDi9ozLHmfZV2Cd-6hfIGp9Bl', name: 'McGrath 15s' },
+              { id: '1-NTDHyBMZQoDaDzaUTdZTK-dRVVa5pPK', name: 'McGrath 6s' },
+              { id: '1OM-EYPi7KP_7TrWfByaXKfO8XTzIt3jH', name: 'Newell Bubba' }
+            ]
+          },
+          {
+            title: 'Workflow & Process',
+            videos: [
+              { id: '13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8', name: 'CIP Client Review' },
+              { id: '1DlTUE5Bew-q_lnAO33mFczyD9a5es6EZ', name: 'CIP Dashboard' }
+            ]
+          }
+        ]
+      }
+    };
+
+    // Master password (always works)
+    const masterPassword = 'KartelStudios2026!';
+
+    // State
+    let currentIndustry = null;
+    let currentCompany = null;
+    let isAuthenticated = false;
+
+    // Initialize
+    function init() {
+      const params = new URLSearchParams(window.location.search);
+      const industry = params.get('industry');
+      const company = params.get('company');
+
+      currentCompany = company;
+
+      if (!industry || !industries[industry]) {
+        // Show directory
+        renderDirectory();
+      } else {
+        // Show industry portfolio with password gate
+        currentIndustry = industry;
+        showPasswordGate();
+      }
+    }
+
+    // Render directory page
+    function renderDirectory() {
+      document.getElementById('directoryPage').classList.remove('hidden');
+      document.getElementById('passwordGate').classList.add('hidden');
+      document.getElementById('mainContent').classList.add('hidden');
+
+      const grid = document.getElementById('industryGrid');
+      grid.innerHTML = '';
+
+      for (const [key, data] of Object.entries(industries)) {
+        const card = document.createElement('a');
+        card.href = `?industry=${key}`;
+        card.className = 'industry-card';
+        card.style.color = data.accent;
+        card.innerHTML = `
+          <h3>${data.name}</h3>
+          <p>${data.description}</p>
+          <span class="accent">→ Explore</span>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    // Show password gate
+    function showPasswordGate() {
+      document.getElementById('directoryPage').classList.add('hidden');
+      document.getElementById('passwordGate').classList.remove('hidden');
+      document.getElementById('mainContent').classList.add('hidden');
+
+      const gateSubtitle = document.getElementById('gateSubtitle');
+      if (currentCompany) {
+        gateSubtitle.textContent = `Enter your password to view KARTEL × ${currentCompany.toUpperCase()} portfolio`;
+      } else {
+        gateSubtitle.textContent = 'Enter your collection password';
+      }
+
+      document.getElementById('password').value = '';
+      document.getElementById('passwordError').style.display = 'none';
+      document.getElementById('password').classList.remove('error');
+    }
+
+    // Password form submission
+    document.getElementById('passwordForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      const correctPassword = industries[currentIndustry].password;
+      const errorDiv = document.getElementById('passwordError');
+      const input = document.getElementById('password');
+
+      if (password === correctPassword || password === masterPassword) {
+        isAuthenticated = true;
+        renderPortfolio();
+      } else {
+        input.classList.add('error');
+        errorDiv.textContent = 'Incorrect password. Please try again.';
+        errorDiv.style.display = 'block';
+        input.value = '';
+      }
+    });
+
+    // Render portfolio
+    function renderPortfolio() {
+      document.getElementById('directoryPage').classList.add('hidden');
+      document.getElementById('passwordGate').classList.add('hidden');
+      document.getElementById('mainContent').classList.remove('hidden');
+
+      const data = industries[currentIndustry];
+      const accentColor = data.accent;
+
+      // Set hero content
+      const heroBanner = document.getElementById('heroBanner');
+      if (currentCompany) {
+        heroBanner.classList.add('branded');
+        document.getElementById('heroTitle').textContent = 'KARTEL ×';
+        document.getElementById('heroSubtitle').innerHTML = currentCompany.toUpperCase();
+      } else {
+        heroBanner.classList.remove('branded');
+        document.getElementById('heroTitle').textContent = 'Kartel AI';
+        document.getElementById('heroSubtitle').textContent = data.name;
+      }
+
+      document.getElementById('heroDescription').textContent = data.description;
+
+      // Render sections
+      const container = document.getElementById('videoSectionsContainer');
+      container.innerHTML = '';
+
+      data.sections.forEach((section) => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'video-section';
+        sectionDiv.style.color = accentColor;
+
+        const title = document.createElement('h3');
+        title.textContent = section.title;
+        sectionDiv.appendChild(title);
+
+        const grid = document.createElement('div');
+        grid.className = 'video-grid';
+
+        section.videos.forEach((video) => {
+          const card = document.createElement('div');
+          card.className = 'video-card';
+          card.onclick = () => openModal(video.id);
+
+          const img = document.createElement('img');
+          img.src = getThumbnailUrl(video.id);
+          img.alt = video.name;
+          img.onerror = () => {
+            img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 225"%3E%3Crect fill="%23111" width="400" height="225"/%3E%3Ccircle cx="200" cy="112.5" r="30" fill="%23333"/%3E%3C/svg%3E';
+          };
+
+          const playIcon = document.createElement('svg');
+          playIcon.className = 'play-icon';
+          playIcon.innerHTML = '<use href="#play-icon"></use>';
+          playIcon.style.color = accentColor;
+
+          card.appendChild(img);
+          card.appendChild(playIcon);
+          grid.appendChild(card);
+        });
+
+        sectionDiv.appendChild(grid);
+        container.appendChild(sectionDiv);
+      });
+
+      // Set CTA
+      const ctaEmail = currentCompany
+        ? `ben@kartel.ai?subject=KARTEL%20×%20${encodeURIComponent(currentCompany)}%20Portfolio`
+        : 'ben@kartel.ai?subject=Kartel%20Portfolio%20Inquiry';
+
+      document.getElementById('ctaButton').href = `mailto:${ctaEmail}`;
+      document.getElementById('ctaDescription').textContent =
+        currentCompany
+          ? `Let's discuss how Kartel AI can elevate ${currentCompany}'s creative vision`
+          : 'Let\'s discuss how Kartel AI can elevate your creative vision';
+    }
+
+    // Get thumbnail URL with fallback chain
+    function getThumbnailUrl(fileId) {
+      // Try lh3 CDN first
+      const lh3Url = `https://lh3.googleusercontent.com/d/${fileId}=w400`;
+      return lh3Url;
+    }
+
+    // Open video modal
+    function openModal(fileId) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+      modal.classList.add('open');
+    }
+
+    // Close modal
+    function closeModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoIframe');
+      modal.classList.remove('open');
+      iframe.src = '';
+    }
+
+    // Close modal on background click
+    document.getElementById('videoModal').addEventListener('click', (e) => {
+      if (e.target.id === 'videoModal') {
+        closeModal();
+      }
+    });
+
+    // Keyboard close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Navigation
+    function goToDirectory() {
+      currentIndustry = null;
+      currentCompany = null;
+      isAuthenticated = false;
+      window.location.href = window.location.pathname;
+    }
+
+    function logout() {
+      isAuthenticated = false;
+      if (currentIndustry) {
+        showPasswordGate();
+      }
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>
