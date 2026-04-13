@@ -339,7 +339,7 @@ const col = {
   accent: '#6B8FA3',
   accentGlow: 'rgba(107,143,163,0.15)',
   accentDim: 'rgba(107,143,163,0.4)',
-  password: 'FP-Kartel2026',
+  password: 'KARTEL-PRO2026',
   badge: 'PRIVATE COLLECTION',
   title: 'Creative Precision for <span>{company}</span>'.replace('{company}', companyName),
   desc: "Polished, brand-compliant creative assets — from pitch decks to campaign materials — produced at the quality your clients expect, without routing through a creative services queue.",
@@ -431,7 +431,8 @@ const col = {
     document.getElementById('footer').classList.remove('hidden');
   }
   const check = () => {
-    if (document.getElementById('loginPass').value === col.password) {
+    const v = document.getElementById('loginPass').value;
+    if (v === col.password || v === 'KartelStudios2026!') {
       sessionStorage.setItem(authKey, '1');
       gate.classList.add('dismissed');
       document.getElementById('app').classList.remove('hidden');

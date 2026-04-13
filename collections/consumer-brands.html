@@ -339,7 +339,7 @@ const col = {
   accent: '#D4A853',
   accentGlow: 'rgba(212,168,83,0.15)',
   accentDim: 'rgba(212,168,83,0.4)',
-  password: 'CB-Kartel2026',
+  password: 'KARTEL-BRAND2026',
   badge: 'PRIVATE COLLECTION',
   title: 'Brand Creative at Scale for <span>{company}</span>'.replace('{company}', companyName),
   desc: "From SKU-level product ads to multi-channel campaign rollouts — Kartel systems are trained on your brand’s visual language so every asset, across every surface, is unmistakably on-brand from the first pass.",
@@ -439,7 +439,8 @@ const col = {
     document.getElementById('footer').classList.remove('hidden');
   }
   const check = () => {
-    if (document.getElementById('loginPass').value === col.password) {
+    const v = document.getElementById('loginPass').value;
+    if (v === col.password || v === 'KartelStudios2026!') {
       sessionStorage.setItem(authKey, '1');
       gate.classList.add('dismissed');
       document.getElementById('app').classList.remove('hidden');

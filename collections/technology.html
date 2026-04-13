@@ -339,7 +339,7 @@ const col = {
   accent: '#298DC1',
   accentGlow: 'rgba(41,141,193,0.15)',
   accentDim: 'rgba(41,141,193,0.4)',
-  password: 'TC-Kartel2026',
+  password: 'KARTEL-TECH2026',
   badge: 'PRIVATE COLLECTION',
   title: 'Creative Infrastructure for <span>{company}</span>'.replace('{company}', companyName),
   desc: "A curated look at how Kartel’s AI-powered creative systems integrate with product, marketing, and sales workflows — producing on-brand assets across every surface without manual QA loops.",
@@ -433,7 +433,8 @@ const col = {
     document.getElementById('footer').classList.remove('hidden');
   }
   const check = () => {
-    if (document.getElementById('loginPass').value === col.password) {
+    const v = document.getElementById('loginPass').value;
+    if (v === col.password || v === 'KartelStudios2026!') {
       sessionStorage.setItem(authKey, '1');
       gate.classList.add('dismissed');
       document.getElementById('app').classList.remove('hidden');

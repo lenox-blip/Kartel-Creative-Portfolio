@@ -1,8 +1,10 @@
-# Video files (hosted on Google Drive, not in repo)
+# Video files (large files hosted on Google Drive, not in repo)
 *.mov
 *.mp4
 *.avi
 *.mkv
+# Allow the intro video (54MB, under GitHub 100MB limit)
+!kartel-intro.mp4
 
 # macOS
 .DS_Store
