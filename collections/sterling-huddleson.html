@@ -274,7 +274,11 @@ footer p{color:var(--text-muted);font-size:.62rem;letter-spacing:2px;text-transf
         <div class="brand-x">&times;</div>
         <div class="client-mark" id="clientMark"></div>
       </div>
-      <div class="hero-badge" id="heroBadge">PRIVATE COLLECTION</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <div class="hero-badge" id="heroBadge">PRIVATE COLLECTION</div>
+        <a href="https://kartel.ai" target="_blank" class="hero-badge" style="text-decoration:none;cursor:pointer;transition:all .3s" onmouseover="this.style.background='var(--client-accent)';this.style.color='#000';this.style.borderColor='var(--client-accent)'" onmouseout="this.style.background='rgba(0,0,0,.3)';this.style.color='var(--client-accent)';this.style.borderColor='var(--client-accent-glow)'">KARTEL.AI</a>
+        <a href="https://realestate-dev.kartel.ai/" target="_blank" class="hero-badge" style="text-decoration:none;cursor:pointer;transition:all .3s" onmouseover="this.style.background='var(--client-accent)';this.style.color='#000';this.style.borderColor='var(--client-accent)'" onmouseout="this.style.background='rgba(0,0,0,.3)';this.style.color='var(--client-accent)';this.style.borderColor='var(--client-accent-glow)'">REAL ESTATE PLATFORM</a>
+      </div>
     </div>
     <div class="hero-glow"></div>
     <div class="hero-title" id="heroTitle"></div>
@@ -343,34 +347,15 @@ const col = {
   desc: "A curated selection of Kartel\u2019s creative production work \u2014 luxury brand films, spatial storytelling, product visualization, and polished commercial content tailored for architecture and design practices that demand the highest level of craft.",
   sowDeliverables: null,
   sections: [
-    {name:"Luxury Brand & Lifestyle",barColor:"client",videos:[
-      {name:"Porsche Web",id:"1MtpDJvibVf7OiRurhkskHS5h_kR18Zis",cat:"Luxury Digital"},
+    {name:"Selected Work",barColor:"client",videos:[
+      {name:"Real Estate Visualization Engine",id:"1Bp_e1fADPWx5D70vkGchuWQZNnOZ55Gh",cat:"Real Estate Visualization"},
+      {name:"Kartel CBS News Clip",id:"18gVdXetyWeWPLpk4j5XdMUzW7-zETAbA",cat:"Press"},
       {name:"BMW Spec Ad",id:"1wcAnerqRvyv1Wb7BOpRLSCP1uTPKaekP",cat:"Luxury Automotive"},
       {name:"Adidas Web",id:"1_QCdrPJORpK2E3k1EYNdrbAvnvuuT1fc",cat:"Brand Digital"},
       {name:"Heny Web",id:"1oA3n0NhCH39zHIyLBgGl8x-jfeGzd9qb",cat:"Luxury Brand"},
       {name:"Rikai Fashion Ad",id:"1_tPCqqyAz8DfQ_G9iLEz9aWeT-OEVeHc",cat:"Fashion Commercial"},
-      {name:"Traditional Grey",id:"1sIsOsGK1QpZISQLeYsTbbhG-B8XFQQTV",cat:"Aesthetic Film"}
-    ]},
-    {name:"Spatial Storytelling & Film",barColor:"client",videos:[
-      {name:"Netflix Final",id:"1IU5V3fiMum-rLF1ilrY1OHqi-DsGnAcC",cat:"Commercial"},
-      {name:"McGrath Kavinoky \u2014 4K Final",id:"1dqd7Zmi3-y14IQWVaSGyvtyzrrjzgeEM",cat:"Commercial"},
-      {name:"Froya Hero Video",id:"1w3Z3aGz8Ae3LwdW4ik_PplxuD3uX3dkA",cat:"Brand Film"},
-      {name:"Froya V2 w/ VO",id:"1WuEsMUM3jfeZuobcI8_4MSlT8iHsjXuL",cat:"Brand Film"},
-      {name:"Don\u2019t Call Me Lucky \u2014 Trailer",id:"1lsr3BZ05jLxepxKX3CdskwqeMWzIysdt",cat:"Film Trailer"},
-      {name:"Everyday Dose",id:"1ra66S_KzowwPiC9iWF2WFXOfx6B9hWvW",cat:"DTC Commercial"}
-    ]},
-    {name:"Visualization & Process",barColor:"client",videos:[
-      {name:"Car Workflow",id:"1GYhFPKEF4068f384EKzEM8rdquvYvzjg",cat:"Product Visualization"},
-      {name:"Marc Jacobs Workflow (ComfyUI)",id:"13PjUFyWHFqTN0tJhpnb8EwaOsfTFAkW3",cat:"AI Workflow"},
       {name:"CIP Client Dashboard Flow",id:"1DlTUE5Bew-q_lnAO33mFczyD9a5es6EZ",cat:"Platform Demo"},
-      {name:"CIP Client Review Workflow",id:"13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8",cat:"Collaborative Review"},
-      {name:"Real Estate STU (Affordable)",id:"1Bp_e1fADPWx5D70vkGchuWQZNnOZ55Gh",cat:"Real Estate Demo"}
-    ]},
-    {name:"Kartel Capabilities",barColor:"green",videos:[
-      {name:"Kartel Demo",id:"1y8NezcoQlrnSm2YSoPmiz4yRXVLNtpy5",cat:"Capabilities Reel"},
-      {name:"New Reel Master",id:"1aTMvhs35gd6B_0fLM6M3xbV_EtdAczAQ",cat:"Reel"},
-      {name:"Kartel Scaling Creative Cut",id:"1aDMOw1wWAvFiOFsJTP0f3IVEgAB3wE-p",cat:"Capabilities"},
-      {name:"Kartel CBS News Clip",id:"18gVdXetyWeWPLpk4j5XdMUzW7-zETAbA",cat:"Press"}
+      {name:"CIP Client Review Workflow",id:"13gB4Iuzv69QkxZVT26y1aJgUgnApNyL8",cat:"Collaborative Review"}
     ]}
   ]
 };
@@ -462,13 +447,8 @@ const col = {
   document.getElementById('heroDesc').textContent = col.desc;
   document.getElementById('footerClient').textContent = companyName;
 
-  // Stats
-  let totalVideos = 0;
-  col.sections.forEach(s => { if (s.videos) totalVideos += s.videos.length; });
-  document.getElementById('heroStats').innerHTML = `
-    <div class="hero-stat"><div class="hero-stat-value">${totalVideos}</div><div class="hero-stat-label">Videos</div></div>
-    <div class="hero-stat"><div class="hero-stat-value">${col.sections.length}</div><div class="hero-stat-label">Sections</div></div>
-  `;
+  // Stats — hidden per client request
+  document.getElementById('heroStats').innerHTML = '';
 
   // Sections
   const content = document.getElementById('content');
